@@ -4,6 +4,7 @@ import { ItemIterface } from '../../interface/ItemInterface';
 import Item from '../Item/Item';
 import Loading from '../Loading/Loading';
 import SearchSection from '../SearchSection/SearchSection';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class ListItem extends React.Component {
   state = {
@@ -38,21 +39,25 @@ class ListItem extends React.Component {
     this.fetchData(target.search.value);
     localStorage.setItem('searchValue', target.search.value.trim());
   };
+
   render() {
-    const { data, isLoading } = this.state;
+    const { data, isLoading, hasError } = this.state;
+    console.log(hasError, 'hasError');
 
     return (
       <>
-        <SearchSection handleSubmit={this.handleSubmit} />
-        <div className="items-container">
-          {!isLoading ? (
-            data.map((e: ItemIterface) => {
-              return <Item key={e.url} {...e} />;
-            })
-          ) : (
-            <Loading />
-          )}
-        </div>
+        <ErrorBoundary>
+          <SearchSection handleSubmit={this.handleSubmit} />
+          <div className="items-container">
+            {!isLoading && !hasError ? (
+              data.map((e: ItemIterface) => {
+                return <Item key={e.url} {...e} />;
+              })
+            ) : (
+              <Loading />
+            )}
+          </div>
+        </ErrorBoundary>
       </>
     );
   }

@@ -8,11 +8,18 @@ type Props = {
 class SearchSection extends React.Component<Props> {
   state = {
     searchValue: '',
+    hasError: false,
+  };
+  handleClick = () => {
+    this.setState({ hasError: true });
   };
   componentDidMount(): void {
     this.setState({
       searchValue: localStorage.getItem('searchValue') || '',
     });
+  }
+  componentDidUpdate(): void {
+    if (this.state.hasError) throw new Error();
   }
 
   render() {
@@ -36,6 +43,9 @@ class SearchSection extends React.Component<Props> {
             Search
           </button>
         </form>
+        <button type="button" onClick={this.handleClick} className="search-btn">
+          Click to throw error
+        </button>
       </section>
     );
   }

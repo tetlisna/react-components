@@ -19,6 +19,7 @@
 .search-btn {
   border: 1px solid #d3cffa;
   background-color: #fff;
+  margin-right: 1rem;
 }
 
 .search-btn:hover {
@@ -27,7 +28,7 @@
 }
 
 .search-btn:active {
-  transform: translateY(-50%);
+  transform: translateY(-20%);
 }
 
 .search-icon-wrapper {
@@ -36,7 +37,7 @@
 
 .search-icon {
   position: absolute;
-  top: 52%;
+  top: 53%;
   left: 6px;
   color: #6c6c6c;
   padding-right: 0.9rem;
