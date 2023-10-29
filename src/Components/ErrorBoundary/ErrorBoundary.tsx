@@ -3,7 +3,6 @@ import React, { Component, ErrorInfo } from 'react';
 interface Props {
   children: React.ReactNode;
 }
-
 interface State {
   hasError: boolean;
 }
