@@ -14,6 +14,7 @@ class SearchSection extends React.Component<Props> {
       searchValue: localStorage.getItem('searchValue') || '',
     });
   }
+console.log('mm');
 
   render() {
     return (
