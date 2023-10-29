@@ -1,6 +1,7 @@
 .search-container {
   padding: 1rem;
 }
+
 .search-input {
   margin: 1rem 0;
   width: 100%;
@@ -14,14 +15,25 @@
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 .search-btn {
-  border: none;
+  border: 1px solid #d3cffa;
   background-color: #fff;
+}
+
+.search-btn:hover {
+  background-color: #b4a4f4;
+  transition: 500ms;
+}
+
+.search-btn:active {
+  transform: translateY(-50%);
 }
 
 .search-icon-wrapper {
   position: relative;
 }
+
 .search-icon {
   position: absolute;
   top: 52%;

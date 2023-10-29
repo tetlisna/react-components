@@ -19,10 +19,19 @@ class Item extends React.Component<Props> {
           alt={'Photo of ' + this.props.name}
           className="item-image"
         />
-        <h2>{this.props.name}</h2>
-        <h3>{this.props.eye_color}</h3>
-        <h3>{this.props.gender}</h3>
-        <p>{this.props.birth_year}</p>
+        <h2>Name: {this.props.name}</h2>
+        <p>
+          <strong>Eye color: </strong>
+          {this.props.eye_color}
+        </p>
+        <p>
+          <strong>Gender: </strong>
+          {this.props.gender}
+        </p>
+        <p>
+          <strong>Birth year: </strong>
+          {this.props.birth_year}
+        </p>
       </article>
     );
   }

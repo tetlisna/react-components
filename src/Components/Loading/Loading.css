@@ -1,9 +1,9 @@
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 0.5rem solid #232232;
+  width: 40px;
+  height: 40px;
+  border: 0.5rem solid #4b4077;
   border-radius: 50%;
-  border-top: 0.5rem solid #929292;
+  border-top: 0.5rem solid #a3a3f5;
   animation: spinner 1.5s linear infinite;
 }
 @keyframes spinner {

@@ -8,3 +8,10 @@
   max-width: 100%;
   height: 100px;
 }
+
+.item-image:hover {
+  width: auto;
+  max-width: 100%;
+  height: 100px;
+  transform: scale(1.1);
+}
