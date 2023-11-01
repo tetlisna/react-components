@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  background-image: url(./assets/wave.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.items-container {
+  width: 90vw;
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin: 5rem auo;
+  padding: 1em;
+}
+
+@media screen and (max-width: 768px) {
+  .items-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
