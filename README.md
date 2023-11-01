@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Deploy React Class Components] (https://tetlisna.github.io/react-components/)
 
 Currently, two official plugins are available:
 
