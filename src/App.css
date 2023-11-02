@@ -5,6 +5,7 @@
 }
 
 body {
+  max-width: 1170px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   background-image: url(./assets/wave.svg);
@@ -14,14 +15,26 @@ body {
 
 .items-container {
   width: 90vw;
-  max-width: 1170px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
   margin: 5rem auo;
   padding: 1em;
 }
-
+header nav {
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+  margin: auto;
+}
+header nav a {
+  text-decoration: none;
+  /* padding: 6px;
+  border-radius: 4px; */
+}
+header nav a.active {
+  color: violet;
+}
 @media screen and (max-width: 768px) {
   .items-container {
     grid-template-columns: 1fr 1fr;

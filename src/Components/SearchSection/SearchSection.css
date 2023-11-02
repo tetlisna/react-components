@@ -37,9 +37,10 @@
 
 .search-icon {
   position: absolute;
-  top: 53%;
+  width: 30px;
+  top: 50%;
   left: 6px;
   color: #6c6c6c;
-  padding-right: 0.9rem;
+  padding-right: 0.7rem;
   transform: translateY(-50%);
 }
