@@ -10,7 +10,6 @@ type Props = {
 const Item = (props: Props) => {
   const { name, url, eye_color, birth_year, gender } = props;
   const imageUrl = 'https://starwars-visualguide.com/assets/img/characters';
-  console.log(props, 'props');
 
   const heroId = url.split('/');
   return (
@@ -20,7 +19,7 @@ const Item = (props: Props) => {
         alt={'Photo of ' + name}
         className="item-image"
       />
-      <h2>Name: {name}</h2>
+      <h2>{name}</h2>
       <p>
         <strong>Eye color: </strong>
         {eye_color}

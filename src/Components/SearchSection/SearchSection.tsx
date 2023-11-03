@@ -4,6 +4,7 @@ import { FaSistrix } from 'react-icons/fa';
 
 type Props = {
   handleSubmit: (event: FormEvent) => void;
+  searchQuery: string | null;
 };
 const SearchSection = (props: Props) => {
   const [state, setState] = useState({

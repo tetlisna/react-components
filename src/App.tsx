@@ -1,29 +1,30 @@
-import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+import { Home } from './pages/Home';
+import ListItem from './components/ItemsSection/ListItems';
+import Layout from './components/Layout/Layout';
 
-import ListItem from './Components/ItemsSection/ListItem';
-import { Home } from './Components/pages/Home';
+const App = () => {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/react-components" element={<Layout />}>
+        <Route
+          path="/react-components/list-item"
+          element={<ListItem searchQuery={''} />}
+        />
+        <Route path="list-item" element={<ListItem searchQuery={''} />} />
+        <Route path="list-item" element={<Home />} />
+      </Route>
+    )
+  );
+  console.log(router);
 
-class App extends React.Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <header>
-          <nav>
-            <NavLink to="/react-components/home"> Home </NavLink>
-          </nav>
-        </header>
-        <main>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/react-components/home" element={<Home />} />
-          </Routes>
-          <ListItem />
-        </main>
-      </BrowserRouter>
-    );
-  }
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;

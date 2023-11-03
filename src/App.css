@@ -14,7 +14,6 @@ body {
 }
 
 .items-container {
-  width: 90vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
@@ -23,17 +22,18 @@ body {
 }
 header nav {
   display: flex;
-  justify-content: end;
+  flex-direction: column;
   gap: 16px;
-  margin: auto;
+  padding: 1rem;
 }
+
 header nav a {
   text-decoration: none;
-  /* padding: 6px;
-  border-radius: 4px; */
+  padding: 6px;
+  border-radius: 4px;
 }
 header nav a.active {
-  color: violet;
+  background-color: violet;
 }
 @media screen and (max-width: 768px) {
   .items-container {

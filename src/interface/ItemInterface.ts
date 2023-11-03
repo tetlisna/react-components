@@ -5,3 +5,6 @@ export interface ItemIterface {
   birth_year: string;
   films: string[];
 }
+export interface IitemsList {
+  results: ItemIterface[];
+}
