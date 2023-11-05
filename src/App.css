@@ -13,8 +13,3 @@ body {
   background-size: cover;
 }
 
-@media screen and (max-width: 768px) {
-  .items-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}

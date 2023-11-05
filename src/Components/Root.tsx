@@ -1,6 +1,7 @@
 // import Pagination from './Pagination';
 import SearchSection from './SearchSection/SearchSection';
 import ListItems from './ItemsSection/ListItems';
+import { Details } from '../pages/Details';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,7 +32,9 @@ const Root = () => {
         </div>
         <ListItems searchQuery={searchQuery} />
       </div>
-      <div id="detail">Details</div>
+      <div id="detail">
+        <Details />
+      </div>
     </>
   );
 };

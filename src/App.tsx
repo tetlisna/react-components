@@ -16,9 +16,9 @@ const App = () => {
       <Route
         path="/"
         element={<Layout />}
-        errorElement={<ErrorBoundary children={undefined} />}
+        errorElement={<ErrorBoundary children={<NotFound />} />}
       >
-        <Route path="list-item/" element={<Root />} />
+        <Route path="/" element={<Root />} />
         <Route path="list-item/:page" element={<Root />} />
         <Route path="*" element={<NotFound />} />
       </Route>

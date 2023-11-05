@@ -12,8 +12,11 @@ const Item = (props: Props) => {
   const imageUrl = 'https://starwars-visualguide.com/assets/img/characters';
 
   const heroId = url.split('/');
+  function handleChange() {
+    console.log('handleChange');
+  }
   return (
-    <article className="item-card">
+    <article className="item-card" onClick={handleChange}>
       <img
         src={`${imageUrl}/${heroId[heroId.length - 2]}.jpg`}
         alt={'Photo of ' + name}
