@@ -13,28 +13,6 @@ body {
   background-size: cover;
 }
 
-.items-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-  margin: 5rem auo;
-  padding: 1em;
-}
-header nav {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 1rem;
-}
-
-header nav a {
-  text-decoration: none;
-  padding: 6px;
-  border-radius: 4px;
-}
-header nav a.active {
-  background-color: violet;
-}
 @media screen and (max-width: 768px) {
   .items-container {
     grid-template-columns: 1fr 1fr;

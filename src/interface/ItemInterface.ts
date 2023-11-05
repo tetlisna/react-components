@@ -7,4 +7,5 @@ export interface ItemIterface {
 }
 export interface IitemsList {
   results: ItemIterface[];
+  count: number;
 }

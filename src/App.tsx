@@ -5,24 +5,25 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import { Home } from './pages/Home';
-import ListItem from './components/ItemsSection/ListItems';
+import NotFound from './pages/NotFound';
+import Root from './components/Root';
 import Layout from './components/Layout/Layout';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/react-components" element={<Layout />}>
-        <Route
-          path="/react-components/list-item"
-          element={<ListItem searchQuery={''} />}
-        />
-        <Route path="list-item" element={<ListItem searchQuery={''} />} />
-        <Route path="list-item" element={<Home />} />
+      <Route
+        path="/"
+        element={<Layout />}
+        errorElement={<ErrorBoundary children={undefined} />}
+      >
+        <Route path="list-item/" element={<Root />} />
+        <Route path="list-item/:page" element={<Root />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );
-  console.log(router);
 
   return <RouterProvider router={router} />;
 };
