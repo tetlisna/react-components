@@ -6,7 +6,7 @@ import Loading from '../Loading/Loading';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { fetchData } from '../../utils/api';
 import Pagination from '../Pagination/Pagination';
-import { useParams, useNavigate, Outlet } from 'react-router-dom';
+import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
 
 interface State {
   data: ItemIterface[];
@@ -29,7 +29,7 @@ const ListItems = ({ searchQuery }: Props) => {
     totalCount: 0,
   });
 
-  const { page } = useParams();
+  const { page, id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -105,9 +105,12 @@ const ListItems = ({ searchQuery }: Props) => {
     <ErrorBoundary>
       <div className="items-container">
         {!isLoading && !hasError ? (
-          data.map((e: ItemIterface) => {
-            return <Item key={e.url} {...e} />;
-          })
+          <>
+            {data.map((e: ItemIterface) => {
+              return <Item key={e.url} {...e} />;
+            })}
+            {id ? <NavLink id="overlay" to=".."></NavLink> : ''}
+          </>
         ) : (
           <Loading />
         )}

@@ -62,16 +62,15 @@ html body {
   background-color: var(--light);
 }
 .close-btn {
-    display: block;
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    right: 0;
+  display: block;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  font-size: 2rem;
+  right: 0.5rem;
 }
 .close-btn:after {
   content: '\00d7';
-  /* padding: 22px 32px; */
-  /* transform: translate(0%, -50%); */
 }
 .close:hover {
   background-color: violet;

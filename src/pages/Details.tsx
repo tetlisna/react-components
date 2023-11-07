@@ -18,7 +18,6 @@ const Details = () => {
       const data = await fetchPerson(id || '1');
       setPerson(data);
       setIsLoading(false);
-      console.log(data, 'data');
     } catch (error) {
       throw new Error();
     }
@@ -28,25 +27,23 @@ const Details = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
-          <article className="details-card">
-            <NavLink to=".." className="close-btn"></NavLink>
-            <h3>{person!.name}</h3>
-            <p>
-              <strong>Eye color: </strong>
-              {person!.eye_color}
-            </p>
-            <p>
-              <strong>Gender: </strong>
-              {person!.gender}
-            </p>
-            <p>
-              <strong>Birth year: </strong>
-              {person!.birth_year}
-            </p>
-          </article>
-        </>
-      )}{' '}
+        <article className="details-card">
+          <NavLink to=".." className="close-btn"></NavLink>
+          <h3>{person!.name}</h3>
+          <p>
+            <strong>Eye color: </strong>
+            {person!.eye_color}
+          </p>
+          <p>
+            <strong>Gender: </strong>
+            {person!.gender}
+          </p>
+          <p>
+            <strong>Birth year: </strong>
+            {person!.birth_year}
+          </p>
+        </article>
+      )}
     </div>
   );
 };
