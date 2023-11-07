@@ -3,11 +3,12 @@
   flex-wrap: wrap;
   padding-left: 1rem;
   gap: 1rem;
-  cursor: pointer;
 }
+
 .pagination li {
   list-style: none;
 }
+
 .pagination-item {
   text-align: center;
   line-height: 40px;
@@ -17,10 +18,12 @@
   height: 40px;
   border-radius: 50%;
 }
+
 .pagination-item.active {
   text-decoration: none;
   background-color: rgb(204, 166, 238);
 }
+
 .pagination-item:hover {
   background-color: rgb(204, 166, 238);
 }

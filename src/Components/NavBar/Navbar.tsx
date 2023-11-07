@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
-export const Navbar = () => {
+export const NavBar = () => {
   return (
     <header>
       <nav>
-        {/* <NavLink to="/"> Home </NavLink> */}
-        <NavLink to="/"> Home </NavLink>
-        <NavLink to="details"> Details </NavLink>
+        <NavLink to="/" aria-label="Go to home" preventScrollReset>
+          Home
+        </NavLink>
       </nav>
     </header>
   );

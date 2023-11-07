@@ -1,13 +1,19 @@
+.container {
+  width: 100vw;
+  padding: 1rem;
+}
 .items-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
-  margin: 5rem auto;
-  padding: 1rem;
+}
+.left-wrapper {
+  position: relative;
 }
 
 @media screen and (max-width: 768px) {
   .items-container {
+    max-width: 60%;
     grid-template-columns: 1fr 1fr;
   }
 }

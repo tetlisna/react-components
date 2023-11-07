@@ -1,14 +1,11 @@
-import React, { Component, ErrorInfo } from 'react';
+import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
-interface Props {
-  children: React.ReactNode;
-}
 interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+class ErrorBoundary extends Component<PropsWithChildren, State> {
+  constructor(props: PropsWithChildren) {
     super(props);
     this.state = { hasError: false };
   }
@@ -18,7 +15,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.setState({ hasError: true });
   }
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }

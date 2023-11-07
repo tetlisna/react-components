@@ -1,13 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import '../../interface/ItemInterface';
 import { ItemIterface } from '../../interface/ItemInterface';
-import Item from '../Item/Item';
+import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { fetchData } from '../../utils/api';
 import Pagination from '../Pagination/Pagination';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Outlet } from 'react-router-dom';
 
 interface State {
   data: ItemIterface[];
@@ -15,9 +14,11 @@ interface State {
   isLoading: boolean;
   totalCount: number;
 }
+
 type Props = {
   searchQuery: string | null;
 };
+
 const ListItems = ({ searchQuery }: Props) => {
   const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -27,6 +28,7 @@ const ListItems = ({ searchQuery }: Props) => {
     isLoading: true,
     totalCount: 0,
   });
+
   const { page } = useParams();
   const navigate = useNavigate();
 
@@ -41,8 +43,10 @@ const ListItems = ({ searchQuery }: Props) => {
       hasError: false,
       totalCount: 0,
     });
+
     try {
       let peoples: ItemIterface[] = [];
+
       if (!allPeoples || !allPeoples.length) {
         const promises = [];
         for (let i = 1; i <= 9; i++) {
@@ -74,6 +78,7 @@ const ListItems = ({ searchQuery }: Props) => {
       } else {
         data = data.slice(from, to);
       }
+
       setState({
         data,
         isLoading: false,
@@ -113,6 +118,7 @@ const ListItems = ({ searchQuery }: Props) => {
         itemsPerPage={itemsPerPage || 10}
         handleChange={handleChange}
       />
+      <Outlet />
     </ErrorBoundary>
   );
 };

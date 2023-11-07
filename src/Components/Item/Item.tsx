@@ -1,24 +1,21 @@
 import './Item.css';
+import { NavLink } from 'react-router-dom';
+import { ItemIterface } from '../../interface/ItemInterface';
+import { IMAGE_URL } from '../../interface/constants';
 
-type Props = {
-  name: string;
-  url: string;
-  gender: string;
-  eye_color?: string;
-  birth_year: string;
-};
-const Item = (props: Props) => {
+export const Item = (props: ItemIterface) => {
   const { name, url, eye_color, birth_year, gender } = props;
-  const imageUrl = 'https://starwars-visualguide.com/assets/img/characters';
 
   const heroId = url.split('/');
-  function handleChange() {
-    console.log('handleChange');
-  }
+
   return (
-    <article className="item-card" onClick={handleChange}>
+    <article className="item-card">
+      <NavLink to={`/list-item/details/${heroId[heroId.length - 2]}`}>
+        {' '}
+        <button className="article-btn">Details</button>{' '}
+      </NavLink>
       <img
-        src={`${imageUrl}/${heroId[heroId.length - 2]}.jpg`}
+        src={`${IMAGE_URL}/${heroId[heroId.length - 2]}.jpg`}
         alt={'Photo of ' + name}
         className="item-image"
       />
@@ -38,5 +35,3 @@ const Item = (props: Props) => {
     </article>
   );
 };
-
-export default Item;

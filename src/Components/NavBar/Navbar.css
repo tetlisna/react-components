@@ -1,10 +1,8 @@
 header nav {
   display: flex;
-  /* flex-direction: column; */
   gap: 16px;
   padding: 1rem;
 }
-
 header nav a {
   text-decoration: none;
   padding: 6px;

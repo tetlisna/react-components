@@ -1,14 +1,16 @@
-// import Pagination from './Pagination';
 import SearchSection from './SearchSection/SearchSection';
 import ListItems from './ItemsSection/ListItems';
-import { Details } from '../pages/Details';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+// import { Outlet } from 'react-router-dom';
+import { NavBar } from './NavBar/Navbar';
 
 const Root = () => {
   const [searchQuery, setSearchQuery] = useState(
     localStorage.getItem('searchValue')
   );
+
   const navigate = useNavigate();
 
   function handleSubmit(event: FormEvent): void {
@@ -22,20 +24,19 @@ const Root = () => {
   }
 
   return (
-    <>
+    <ErrorBoundary>
+      <NavBar />
       <div id="sidebar">
-        <div>
+        <div className="left-wrapper">
           <SearchSection
             searchQuery={searchQuery}
             handleSubmit={handleSubmit}
           />
+          <ListItems searchQuery={searchQuery} />
         </div>
-        <ListItems searchQuery={searchQuery} />
+        <div className="right-wrapper"></div>
       </div>
-      <div id="detail">
-        <Details />
-      </div>
-    </>
+    </ErrorBoundary>
   );
 };
 export default Root;
