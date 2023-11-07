@@ -34,7 +34,6 @@ const Root = () => {
           />
           <ListItems searchQuery={searchQuery} />
         </div>
-        <div className="right-wrapper"></div>
       </div>
     </ErrorBoundary>
   );
