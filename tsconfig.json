@@ -16,9 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "allowJs": false,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "src:/*": ["src:/*"]
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "assets/*": ["assets/*"],
+      "services/*": ["services/*"],
+      "interfaces/*": ["interfaces/*"]
     },
 
     /* Linting */

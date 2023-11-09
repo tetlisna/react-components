@@ -2,8 +2,6 @@ import SearchSection from './SearchSection/SearchSection';
 import ListItems from './ItemsSection/ListItems';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-import { NavBar } from './NavBar/Navbar';
 
 const Root = () => {
   const [searchQuery, setSearchQuery] = useState(
@@ -23,19 +21,14 @@ const Root = () => {
   }
 
   return (
-    <ErrorBoundary>
-      <NavBar />
-      <div id="sidebar">
-        <div className="left-wrapper">
-          <SearchSection
-            searchQuery={searchQuery}
-            handleSubmit={handleSubmit}
-          />
-          <ListItems searchQuery={searchQuery} />
-        </div>
-        <div className="right-wrapper"></div>
+    // <NavBar />
+    <div id="sidebar">
+      <div className="left-wrapper">
+        <SearchSection searchQuery={searchQuery} handleSubmit={handleSubmit} />
+        <ListItems searchQuery={searchQuery} />
       </div>
-    </ErrorBoundary>
+      <div className="right-wrapper"></div>
+    </div>
   );
 };
 export default Root;

@@ -1,7 +1,7 @@
 import './Item.css';
 import { NavLink } from 'react-router-dom';
-import { ItemIterface } from '../../interface/interfaces';
-import { IMAGE_URL } from '../../interface/constants';
+import { ItemIterface } from '../../interfaces/interfaces';
+import { IMAGE_URL } from '../../interfaces/constants';
 
 export const Item = (props: ItemIterface) => {
   const { name, url, eye_color, birth_year, gender } = props;

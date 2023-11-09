@@ -20,7 +20,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
   .items-container {
     max-width: 60%;
     grid-template-columns: 1fr 1fr;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
-import { fetchData } from '../services/api';
-import { ItemIterface } from '../interface/interfaces';
-import Loading from 'src/components/Loading/Loading';
+import { fetchData } from 'services/api';
+import { ItemIterface } from 'interfaces/interfaces';
+import Loading from 'components/Loading/Loading';
 
 const Details = () => {
   const { id } = useParams();
@@ -16,6 +16,7 @@ const Details = () => {
   async function fetchedPeople(id: string | null = ''): Promise<void> {
     try {
       const data = await fetchData<ItemIterface>({ id: Number(id) || 1 });
+
       setPerson(data);
       setIsLoading(false);
     } catch (error) {

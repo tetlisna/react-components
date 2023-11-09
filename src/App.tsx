@@ -1,14 +1,14 @@
-// import './App.css';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import Root from './components/Root';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import Details from './pages/Details';
-import Layout from './components/Layout/Layout';
+import Root from 'components/Root';
+
+import Details from 'pages/Details';
+import Layout from 'components/Layout/Layout';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -21,6 +21,7 @@ const App = () => {
         <Route path="list-item/:page" element={<Root />}>
           <Route path="details/" element={<Details />} />
         </Route>
+        <Route path="*" element={<ErrorBoundary />} />
       </Route>
     )
   );

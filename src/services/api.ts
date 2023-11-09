@@ -1,5 +1,5 @@
-import { API_URL_PEOPLE } from '../interface/constants';
-import { IParams } from '../interface/interfaces';
+import { API_URL_PEOPLE } from '../interfaces/constants';
+import { IParams } from '../interfaces/interfaces';
 
 function addQueryParams(url: string, params: IParams): string {
   const urlObject = new URL(url);
@@ -10,7 +10,12 @@ function addQueryParams(url: string, params: IParams): string {
 }
 
 export const fetchData = async <T>(params: IParams): Promise<T> => {
-  const query = addQueryParams(API_URL_PEOPLE, params);
+  let query = addQueryParams(API_URL_PEOPLE, params);
+
+  if (params.id) {
+    query = `${API_URL_PEOPLE}/${params.id}`;
+  }
+
   const res = await fetch(query, {
     method: 'GET',
     headers: {

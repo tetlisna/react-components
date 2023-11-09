@@ -1,13 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import '../../interface/interfaces';
-import { ItemsList, ItemIterface } from '../../interface/interfaces';
+import '../../interfaces/interfaces';
+import { ItemsList, ItemIterface } from '../../interfaces/interfaces';
 import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { fetchData } from '../../services/api';
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
-import { ITEMS_PER_PAGE } from 'src/interface/constants';
+import { ITEMS_PER_PAGE } from 'interfaces/constants';
 
 interface IState {
   data: ItemIterface[];
@@ -90,7 +89,7 @@ const ListItems = ({ searchQuery }: Props) => {
         hasError: false,
         totalCount: totalCount,
       });
-    } catch (error: unknown) {
+    } catch (error) {
       setState({
         data: [],
         isLoading: true,
@@ -108,7 +107,13 @@ const ListItems = ({ searchQuery }: Props) => {
     setItemsPerPage(Number(perPage));
   }
   return (
-    <ErrorBoundary>
+    <>
+      <Pagination
+        totalCount={totalCount}
+        pageNumber={Number(page || 1)}
+        itemsPerPage={itemsPerPage || ITEMS_PER_PAGE.Ten}
+        handleChange={handleChange}
+      />
       <div className="items-container">
         {!isLoading && !hasError ? (
           <>
@@ -121,14 +126,8 @@ const ListItems = ({ searchQuery }: Props) => {
           <Loading />
         )}
       </div>
-      <Pagination
-        totalCount={totalCount}
-        pageNumber={Number(page || 1)}
-        itemsPerPage={itemsPerPage || ITEMS_PER_PAGE.Ten}
-        handleChange={handleChange}
-      />
       <Outlet />
-    </ErrorBoundary>
+    </>
   );
 };
 

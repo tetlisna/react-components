@@ -1,7 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import './SearchSection.css';
 import { FaSistrix } from 'react-icons/fa';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 type Props = {
   handleSubmit: (event: FormEvent) => void;
@@ -24,30 +23,28 @@ const SearchSection = (props: Props) => {
   }, [state.hasError]);
 
   return (
-    <ErrorBoundary>
-      <section className="search-container">
-        <h1>React Search</h1>
-        <form onSubmit={props.handleSubmit}>
-          <div className="search-icon-wrapper">
-            <FaSistrix className="search-icon" />
-            <input
-              placeholder="Search..."
-              name="search"
-              type="search"
-              className="search-input"
-              aria-label="search"
-              defaultValue={state.searchValue}
-            />
-          </div>
-          <button type="submit" className="search-btn">
-            Search
-          </button>
-        </form>
-        <button type="button" onClick={handleClick} className="search-btn">
-          Click to throw error
+    <section className="search-container">
+      <h1>React Search</h1>
+      <form onSubmit={props.handleSubmit}>
+        <div className="search-icon-wrapper">
+          <FaSistrix className="search-icon" />
+          <input
+            placeholder="Search..."
+            name="search"
+            type="search"
+            className="search-input"
+            aria-label="search"
+            defaultValue={state.searchValue}
+          />
+        </div>
+        <button type="submit" className="search-btn">
+          Search
         </button>
-      </section>
-    </ErrorBoundary>
+      </form>
+      <button type="button" onClick={handleClick} className="search-btn">
+        Click to throw error
+      </button>
+    </section>
   );
 };
 

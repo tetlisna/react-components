@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from 'react';
 import '../Pagination/Pagination.css';
 import { NavLink } from 'react-router-dom';
-import { ITEMS_PER_PAGE } from 'src/interface/constants';
+import { ITEMS_PER_PAGE } from 'interfaces/constants';
 
 type Props = {
   totalCount: number;
