@@ -10,3 +10,9 @@ export interface IitemsList {
   results: ItemIterface[];
   count: number;
 }
+export interface IParams {
+  search?: string | '';
+  page?: number;
+  id?: number;
+  hasError?: boolean;
+}

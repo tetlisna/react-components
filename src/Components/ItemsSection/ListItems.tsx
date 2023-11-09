@@ -1,14 +1,15 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import '../../interface/ItemInterface';
-import { ItemIterface } from '../../interface/ItemInterface';
+import '../../interface/interfaces';
+import { IitemsList, ItemIterface } from '../../interface/interfaces';
 import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { fetchData } from '../../utils/api';
-import Pagination from '../Pagination/Pagination';
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
+import Pagination from '../Pagination/Pagination';
+import { ITEMS_PER_PAGE_INITIAL } from 'src/interface/constants';
 
-interface State {
+interface IState {
   data: ItemIterface[];
   hasError: boolean;
   isLoading: boolean;
@@ -21,8 +22,8 @@ type Props = {
 
 const ListItems = ({ searchQuery }: Props) => {
   const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [state, setState] = useState<State>({
+  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_INITIAL);
+  const [state, setState] = useState<IState>({
     data: [],
     hasError: false,
     isLoading: true,
@@ -46,16 +47,23 @@ const ListItems = ({ searchQuery }: Props) => {
 
     try {
       let peoples: ItemIterface[] = [];
+      console.log(peoples, 'peples');
 
       if (!allPeoples || !allPeoples.length) {
         const promises = [];
-        for (let i = 1; i <= 9; i++) {
-          promises.push(fetchData('', i));
+
+        for (let i = 1; i < ITEMS_PER_PAGE_INITIAL; i++) {
+          promises.push(fetchData<IitemsList>({ search: '', page: i }));
         }
+
         const allDataJson = await Promise.all(promises);
         for (const chunk of allDataJson) {
+          console.log(chunk.results, 'chunk');
+
           peoples = [...peoples, ...chunk.results];
         }
+        console.log(peoples, 'peoples after chunk');
+
         setAllPeoples(peoples);
       } else {
         peoples = allPeoples;
@@ -68,6 +76,7 @@ const ListItems = ({ searchQuery }: Props) => {
           p.name.toLowerCase().includes(search.toLowerCase())
         );
       }
+
       const totalCount = data.length;
       const currentPage = page ? Number(page) : 1;
 

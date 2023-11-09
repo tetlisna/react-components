@@ -3,7 +3,6 @@ import ListItems from './ItemsSection/ListItems';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
-// import { Outlet } from 'react-router-dom';
 import { NavBar } from './NavBar/Navbar';
 
 const Root = () => {
