@@ -28,6 +28,7 @@
   text-decoration: none;
   width: 40px;
   height: 40px;
+  color: var(--text);
   border-radius: 50%;
 }
 

@@ -70,8 +70,9 @@ html body {
   border: solid 2px rgb(204, 166, 238);
   border-radius: 50%;
   font-size: 20px;
-  line-height: 20px;
+  line-height: 22px;
   right: -0.5rem;
+  color: var(--text);
   text-align: center;
 }
 .close-btn:after {

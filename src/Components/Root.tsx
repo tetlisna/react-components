@@ -21,7 +21,6 @@ const Root = () => {
   }
 
   return (
-    // <NavBar />
     <div id="sidebar">
       <div className="left-wrapper">
         <SearchSection searchQuery={searchQuery} handleSubmit={handleSubmit} />

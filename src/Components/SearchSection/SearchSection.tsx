@@ -11,9 +11,11 @@ const SearchSection = (props: Props) => {
     searchValue: '',
     hasError: false,
   });
+
   const handleClick = () => {
     setState((prevState) => ({ ...prevState, hasError: true }));
   };
+
   useEffect(() => {
     if (state.hasError) throw new Error();
     setState({
