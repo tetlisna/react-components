@@ -1,0 +1,111 @@
+:root {
+  background-color: #242424;
+  text-rendering: optimizeLegibility;
+
+  /* colors */
+  --accent: 183 74% 44%;
+  --text: 185 26% 9%;
+  --muted: 183 8% 55%;
+  --light: 180 14% 85%;
+  --warning: 4 66% 63%;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+h2 {
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+h3 {
+  font-size: 1.2rem;
+  line-height: 1.1;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  background-image: url(./assets/wave.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+}
+
+html body {
+  padding: 0;
+  margin: 0;
+}
+#sidebar {
+  position: relative;
+}
+.details {
+  position: absolute;
+  max-width: 80%;
+  width: 400px;
+  top: 0;
+  right: 0;
+}
+.details-card {
+  position: relative;
+  margin: 1rem;
+  padding: 1rem;
+  border: dashed 0.2rem #ccc;
+  background-color: var(--light);
+}
+.close-btn {
+  display: block;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  font-size: 2rem;
+  right: 0.5rem;
+}
+.close-btn:after {
+  content: '\00d7';
+}
+.close:hover {
+  background-color: violet;
+}
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.1;
+  font-size: 1rem;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  color: hsl(var(--text));
+}
+
+button {
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}

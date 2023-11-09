@@ -1,0 +1,28 @@
+.container {
+  width: 100vw;
+  padding: 1rem;
+}
+.items-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+#overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+.left-wrapper {
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .items-container {
+    max-width: 60%;
+    grid-template-columns: 1fr 1fr;
+  }
+}
