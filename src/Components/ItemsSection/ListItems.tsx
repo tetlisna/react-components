@@ -7,7 +7,7 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { fetchData } from '../../services/api';
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
-import { ITEMS_PER_PAGE_INITIAL } from 'src/interface/constants';
+import { ITEMS_PER_PAGE } from 'src/interface/constants';
 
 interface IState {
   data: ItemIterface[];
@@ -22,7 +22,7 @@ type Props = {
 
 const ListItems = ({ searchQuery }: Props) => {
   const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
-  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_INITIAL);
+  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.Ten);
   const [state, setState] = useState<IState>({
     data: [],
     hasError: false,
@@ -51,14 +51,12 @@ const ListItems = ({ searchQuery }: Props) => {
       if (!allPeoples || !allPeoples.length) {
         const promises = [];
 
-        for (let i = 1; i < ITEMS_PER_PAGE_INITIAL; i++) {
+        for (let i = 1; i < ITEMS_PER_PAGE.Ten; i++) {
           promises.push(fetchData<ItemsList>({ search: '', page: i }));
         }
 
         const allDataJson = await Promise.all(promises);
         for (const chunk of allDataJson) {
-          console.log(chunk.results, 'chunk');
-
           peoples = [...peoples, ...chunk.results];
         }
 
