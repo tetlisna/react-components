@@ -90,7 +90,7 @@ const ListItems = ({ searchQuery }: Props) => {
         hasError: false,
         totalCount: totalCount,
       });
-    } catch (error) {
+    } catch (error: unknown) {
       setState({
         data: [],
         isLoading: true,
@@ -124,7 +124,7 @@ const ListItems = ({ searchQuery }: Props) => {
       <Pagination
         totalCount={totalCount}
         pageNumber={Number(page || 1)}
-        itemsPerPage={itemsPerPage || 10}
+        itemsPerPage={itemsPerPage || ITEMS_PER_PAGE.Ten}
         handleChange={handleChange}
       />
       <Outlet />

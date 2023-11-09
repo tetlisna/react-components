@@ -1,6 +1,7 @@
 import { ChangeEventHandler } from 'react';
 import '../Pagination/Pagination.css';
 import { NavLink } from 'react-router-dom';
+import { ITEMS_PER_PAGE } from 'src/interface/constants';
 
 type Props = {
   totalCount: number;
@@ -11,21 +12,21 @@ type Props = {
 
 const Pagination = ({ totalCount, itemsPerPage, handleChange }: Props) => {
   function getPages() {
-    const pages: number[] = [];
-    for (let i = 1; i <= Math.ceil(totalCount / itemsPerPage); i++) {
-      pages.push(i);
-    }
-    return pages;
+    const totalPages = Math.ceil(totalCount / itemsPerPage);
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
 
   return (
     <nav>
       <ul className="pagination">
-        <select onChange={handleChange} defaultValue={itemsPerPage}>
-          <option>5</option>
-          <option>10</option>
-          <option>25</option>
-          <option>40</option>
+        <select onChange={handleChange} defaultValue={ITEMS_PER_PAGE.Ten}>
+          <option value={ITEMS_PER_PAGE.Five}>{ITEMS_PER_PAGE.Five}</option>
+          {ITEMS_PER_PAGE.Five}
+          <option value={ITEMS_PER_PAGE.Ten}>{ITEMS_PER_PAGE.Ten}</option>
+          <option value={ITEMS_PER_PAGE.TwentyFive}>
+            {ITEMS_PER_PAGE.TwentyFive}
+          </option>
+          <option value={ITEMS_PER_PAGE.Forty}>{ITEMS_PER_PAGE.Forty}</option>
         </select>
 
         {getPages().map((page) => (
