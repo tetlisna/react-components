@@ -6,7 +6,9 @@ export interface ItemIterface {
   birth_year: string;
   films: string[];
 }
-export interface IitemsList {
+export interface ItemsList {
+  next: string | null;
+  previous: string | null;
   results: ItemIterface[];
   count: number;
 }

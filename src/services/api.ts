@@ -21,7 +21,6 @@ export const fetchData = async <T>(params: IParams): Promise<T> => {
   if (!res.ok) {
     throw Error('Bad response');
   }
-  console.log(results, 'fetched res');
 
   return results;
 };

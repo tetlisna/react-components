@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
-import { fetchData } from '../utils/api';
+import { fetchData } from '../services/api';
 import { ItemIterface } from '../interface/interfaces';
 import Loading from 'src/components/Loading/Loading';
 

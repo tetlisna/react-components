@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import '../../interface/interfaces';
-import { IitemsList, ItemIterface } from '../../interface/interfaces';
+import { ItemsList, ItemIterface } from '../../interface/interfaces';
 import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import { fetchData } from '../../utils/api';
+import { fetchData } from '../../services/api';
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
 import { ITEMS_PER_PAGE_INITIAL } from 'src/interface/constants';
@@ -47,13 +47,12 @@ const ListItems = ({ searchQuery }: Props) => {
 
     try {
       let peoples: ItemIterface[] = [];
-      console.log(peoples, 'peples');
 
       if (!allPeoples || !allPeoples.length) {
         const promises = [];
 
         for (let i = 1; i < ITEMS_PER_PAGE_INITIAL; i++) {
-          promises.push(fetchData<IitemsList>({ search: '', page: i }));
+          promises.push(fetchData<ItemsList>({ search: '', page: i }));
         }
 
         const allDataJson = await Promise.all(promises);
@@ -62,7 +61,6 @@ const ListItems = ({ searchQuery }: Props) => {
 
           peoples = [...peoples, ...chunk.results];
         }
-        console.log(peoples, 'peoples after chunk');
 
         setAllPeoples(peoples);
       } else {
@@ -101,6 +99,7 @@ const ListItems = ({ searchQuery }: Props) => {
         hasError: true,
         totalCount: 0,
       });
+      throw new Error('fetch error');
     }
   }
   const { data, isLoading, hasError, totalCount } = state;
@@ -115,8 +114,8 @@ const ListItems = ({ searchQuery }: Props) => {
       <div className="items-container">
         {!isLoading && !hasError ? (
           <>
-            {data.map((e: ItemIterface) => {
-              return <Item key={e.url} {...e} />;
+            {data.map((person: ItemIterface) => {
+              return <Item key={person.url} {...person} />;
             })}
             {id ? <NavLink id="overlay" to=".."></NavLink> : ''}
           </>
