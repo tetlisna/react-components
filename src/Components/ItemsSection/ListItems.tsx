@@ -1,12 +1,13 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import '../../interfaces/interfaces';
-import { ItemsList, ItemIterface } from '../../interfaces/interfaces';
-import { Item } from '../Item/Item';
-import Loading from '../Loading/Loading';
-import { fetchData } from '../../services/api';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import 'interfaces/interfaces';
+import { ItemsList, ItemIterface } from 'interfaces/interfaces';
+import { Item } from 'components/Item/Item';
+import Loading from 'components/Loading/Loading';
+import { fetchData } from 'services/api';
 import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
-import Pagination from '../Pagination/Pagination';
 import { ITEMS_PER_PAGE } from 'interfaces/constants';
+import { RootContext } from 'context/context';
+import Pagination from 'components/Pagination/Pagination';
 
 interface IState {
   data: ItemIterface[];
@@ -15,11 +16,12 @@ interface IState {
   totalCount: number;
 }
 
-type Props = {
-  searchQuery: string | null;
-};
+// type Props = {
+//   searchQuery: string | null;
+// };
 
-const ListItems = ({ searchQuery }: Props) => {
+// const ListItems = ({ searchQuery }: Props) => {
+const ListItems = () => {
   const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
   const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.Ten);
   const [state, setState] = useState<IState>({
@@ -28,6 +30,8 @@ const ListItems = ({ searchQuery }: Props) => {
     isLoading: true,
     totalCount: 0,
   });
+  const searchQueryContext = useContext(RootContext);
+  const { searchQuery } = searchQueryContext;
 
   const { page, id } = useParams();
   const navigate = useNavigate();

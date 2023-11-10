@@ -12,6 +12,7 @@ export default defineConfig({
       services: '/src/services',
       assets: '/src/assets',
       interfaces: '/src/interfaces',
+      context: '/src/context',
     },
   },
 });
