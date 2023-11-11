@@ -4,6 +4,8 @@
 }
 .items-container {
   display: grid;
+    position: relative;
+
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
 }
@@ -15,9 +17,6 @@
   right: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0);
-}
-.left-wrapper {
-  position: relative;
 }
 
 @media screen and (max-width: 600px) {

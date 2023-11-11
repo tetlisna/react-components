@@ -5,7 +5,7 @@ const defaultContextValues: IRootContextProps = {
   handleSubmit: () => {},
 };
 interface IRootContextProps {
-  searchQuery: string | '';
+  searchQuery: string;
   handleSubmit: (e: FormEvent<Element>) => void;
 }
 

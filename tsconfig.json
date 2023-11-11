@@ -22,7 +22,8 @@
       "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
       "services/*": ["services/*"],
-      "interfaces/*": ["interfaces/*"]
+      "interfaces/*": ["interfaces/*"],
+      "test/*": ["test/*"]
     },
 
     /* Linting */

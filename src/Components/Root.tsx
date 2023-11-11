@@ -6,7 +6,7 @@ import { RootContext } from '../context/context';
 
 const Root = () => {
   const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem('searchValue') || ''
+    localStorage.getItem('searchQuery') || ''
   );
 
   const navigate = useNavigate();
@@ -17,19 +17,16 @@ const Root = () => {
       search: { value: string };
     };
     setSearchQuery(target.search.value.trim());
-    localStorage.setItem('searchValue', target.search.value.trim());
+    localStorage.setItem('searchQuery', target.search.value.trim());
     navigate('/list-item');
   }
 
   return (
     <div id="sidebar">
-      <div className="left-wrapper">
-        <RootContext.Provider value={{ searchQuery, handleSubmit }}>
-          <SearchSection />
-          <ListItems />
-        </RootContext.Provider>
-      </div>
-      <div className="right-wrapper"></div>
+      <RootContext.Provider value={{ searchQuery, handleSubmit }}>
+        <SearchSection />
+        <ListItems />
+      </RootContext.Provider>
     </div>
   );
 };
