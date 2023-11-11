@@ -19,7 +19,7 @@ const App = () => {
           <Route path="details/:id" element={<Details />} />
         </Route>
         <Route path="list-item/:page" element={<Root />}>
-          <Route path="details/" element={<Details />} />
+          <Route path="details/:id" element={<Details />} />
         </Route>
         <Route path="*" element={<ErrorBoundary />} />
       </Route>

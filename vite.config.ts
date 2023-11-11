@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+    setupFiles: ['src/test/setup.ts'],
   },
   resolve: {
     alias: {
@@ -18,7 +18,7 @@ export default defineConfig({
       assets: '/src/assets',
       interfaces: '/src/interfaces',
       context: '/src/context',
-      test: 'src/test',
+      // test: 'src/test',
     },
   },
 });

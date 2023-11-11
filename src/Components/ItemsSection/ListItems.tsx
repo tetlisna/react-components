@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect } from 'react';
 import 'interfaces/interfaces';
 import { ItemsList, ItemIterface } from 'interfaces/interfaces';
 import { Item } from 'components/Item/Item';
@@ -9,24 +9,23 @@ import { ITEMS_PER_PAGE } from 'interfaces/constants';
 import { RootContext } from 'context/context';
 import Pagination from 'components/Pagination/Pagination';
 
-interface IState {
-  data: ItemIterface[];
-  hasError: boolean;
-  isLoading: boolean;
-  totalCount: number;
-}
-
 const ListItems = () => {
-  const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
-  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.Ten);
-  const [state, setState] = useState<IState>({
-    data: [],
-    hasError: false,
-    isLoading: true,
-    totalCount: 0,
-  });
   const searchQueryContext = useContext(RootContext);
-  const { searchQuery } = searchQueryContext;
+  const {
+    searchQuery,
+    itemsPerPage,
+    setItemsPerPage,
+    data,
+    hasError,
+    isLoading,
+    totalCount,
+    setData,
+    setError,
+    setIsLoading,
+    setTotalCount,
+    allPeoples,
+    setAllPeoples,
+  } = searchQueryContext;
 
   const { page, id } = useParams();
   const navigate = useNavigate();
@@ -36,13 +35,10 @@ const ListItems = () => {
   }, [searchQuery, page, itemsPerPage]);
 
   async function fetchedData(search: string | null = ''): Promise<void> {
-    setState({
-      data: [],
-      isLoading: true,
-      hasError: false,
-      totalCount: 0,
-    });
-
+    setData([]);
+    setTotalCount(0);
+    setError(false);
+    setIsLoading(true);
     try {
       let peoples: ItemIterface[] = [];
 
@@ -71,6 +67,8 @@ const ListItems = () => {
         );
       }
 
+      console.log({ data });
+
       const totalCount = data.length;
       const currentPage = page ? Number(page) : 1;
 
@@ -81,24 +79,18 @@ const ListItems = () => {
       } else {
         data = data.slice(from, to);
       }
-
-      setState({
-        data,
-        isLoading: false,
-        hasError: false,
-        totalCount: totalCount,
-      });
+      setData(data);
+      setError(false);
+      setIsLoading(false);
+      setTotalCount(totalCount);
     } catch (error) {
-      setState({
-        data: [],
-        isLoading: true,
-        hasError: true,
-        totalCount: 0,
-      });
+      setData([]);
+      setError(true);
+      setIsLoading(true);
+      setTotalCount(0);
       throw new Error('fetch error');
     }
   }
-  const { data, isLoading, hasError, totalCount } = state;
 
   function handleChange(e: ChangeEvent<HTMLSelectElement>) {
     const perPage = e.target.value;
