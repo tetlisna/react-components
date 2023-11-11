@@ -2,11 +2,11 @@ import SearchSection from './SearchSection/SearchSection';
 import ListItems from './ItemsSection/ListItems';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RootContext } from 'context/context';
+import { RootContext } from '../context/context';
 
 const Root = () => {
   const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem('searchValue')
+    localStorage.getItem('searchValue') || ''
   );
 
   const navigate = useNavigate();
@@ -25,10 +25,7 @@ const Root = () => {
     <div id="sidebar">
       <div className="left-wrapper">
         <RootContext.Provider value={{ searchQuery, handleSubmit }}>
-          <SearchSection
-            searchQuery={searchQuery}
-            handleSubmit={handleSubmit}
-          />
+          <SearchSection />
           <ListItems />
         </RootContext.Provider>
       </div>

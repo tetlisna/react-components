@@ -16,11 +16,6 @@ interface IState {
   totalCount: number;
 }
 
-// type Props = {
-//   searchQuery: string | null;
-// };
-
-// const ListItems = ({ searchQuery }: Props) => {
 const ListItems = () => {
   const [allPeoples, setAllPeoples] = useState([] as ItemIterface[]);
   const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE.Ten);

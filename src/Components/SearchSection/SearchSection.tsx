@@ -1,17 +1,15 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './SearchSection.css';
 import { FaSistrix } from 'react-icons/fa';
+import { RootContext } from 'context/context';
 
-type Props = {
-  handleSubmit: (event: FormEvent) => void;
-  searchQuery: string | null;
-};
-const SearchSection = (props: Props) => {
+const SearchSection = () => {
   const [state, setState] = useState({
-    searchValue: '',
+    searchQuery: '',
     hasError: false,
   });
 
+  const { searchQuery, handleSubmit } = useContext(RootContext);
   const handleClick = () => {
     setState((prevState) => ({ ...prevState, hasError: true }));
   };
@@ -19,7 +17,7 @@ const SearchSection = (props: Props) => {
   useEffect(() => {
     if (state.hasError) throw new Error();
     setState({
-      searchValue: localStorage.getItem('searchValue') || '',
+      searchQuery: localStorage.getItem('searchQuery') || '',
       hasError: false,
     });
   }, [state.hasError]);
@@ -27,7 +25,7 @@ const SearchSection = (props: Props) => {
   return (
     <section className="search-container">
       <h1>React Search</h1>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="search-icon-wrapper">
           <FaSistrix className="search-icon" />
           <input
@@ -36,7 +34,7 @@ const SearchSection = (props: Props) => {
             type="search"
             className="search-input"
             aria-label="search"
-            defaultValue={state.searchValue}
+            defaultValue={searchQuery}
           />
         </div>
         <button type="submit" className="search-btn">
