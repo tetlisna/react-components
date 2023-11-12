@@ -1,0 +1,125 @@
+import { ChangeEvent, useContext, useEffect } from 'react';
+import 'interfaces/interfaces';
+import { ItemsList, ItemIterface } from 'interfaces/interfaces';
+import { Item } from 'components/Item/Item';
+import Loading from 'components/Loading/Loading';
+import { fetchData } from 'services/api';
+import { useParams, useNavigate, Outlet, NavLink } from 'react-router-dom';
+import { ITEMS_PER_PAGE } from 'interfaces/constants';
+import { RootContext } from 'context/context';
+import Pagination from 'components/Pagination/Pagination';
+
+const ListItems = () => {
+  const searchQueryContext = useContext(RootContext);
+  const {
+    searchQuery,
+    itemsPerPage,
+    setItemsPerPage,
+    data,
+    hasError,
+    isLoading,
+    totalCount,
+    setData,
+    setError,
+    setIsLoading,
+    setTotalCount,
+    allPeoples,
+    setAllPeoples,
+  } = searchQueryContext;
+
+  const { page, id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchedData(searchQuery);
+  }, [searchQuery, page, itemsPerPage]);
+
+  async function fetchedData(search: string | null = ''): Promise<void> {
+    setData([]);
+    setTotalCount(0);
+    setError(false);
+    setIsLoading(true);
+    try {
+      let peoples: ItemIterface[] = [];
+
+      if (!allPeoples || !allPeoples.length) {
+        const promises = [];
+
+        for (let i = 1; i < ITEMS_PER_PAGE.Ten; i++) {
+          promises.push(fetchData<ItemsList>({ search: '', page: i }));
+        }
+
+        const allDataJson = await Promise.all(promises);
+        for (const chunk of allDataJson) {
+          peoples = [...peoples, ...chunk.results];
+        }
+
+        setAllPeoples(peoples);
+      } else {
+        peoples = allPeoples;
+      }
+
+      let data = [...peoples];
+
+      if (search) {
+        data = data.filter((p) =>
+          p.name.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+
+      console.log({ data });
+
+      const totalCount = data.length;
+      const currentPage = page ? Number(page) : 1;
+
+      const from = (currentPage - 1) * itemsPerPage;
+      const to = itemsPerPage * currentPage;
+      if (to > totalCount) {
+        data = data.slice(from);
+      } else {
+        data = data.slice(from, to);
+      }
+      setData(data);
+      setError(false);
+      setIsLoading(false);
+      setTotalCount(totalCount);
+    } catch (error) {
+      setData([]);
+      setError(true);
+      setIsLoading(true);
+      setTotalCount(0);
+      throw new Error('fetch error');
+    }
+  }
+
+  function handleChange(e: ChangeEvent<HTMLSelectElement>) {
+    const perPage = e.target.value;
+    navigate('/list-item');
+    setItemsPerPage(Number(perPage));
+  }
+  return (
+    <>
+      <Pagination
+        totalCount={totalCount}
+        pageNumber={Number(page || 1)}
+        itemsPerPage={itemsPerPage || ITEMS_PER_PAGE.Ten}
+        handleChange={handleChange}
+      />
+      <div className="items-container">
+        {!isLoading && !hasError ? (
+          <>
+            {data.map((person: ItemIterface) => {
+              return <Item key={person.url} {...person} />;
+            })}
+            {id ? <NavLink id="overlay" to=".."></NavLink> : ''}
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
+      <Outlet />
+    </>
+  );
+};
+
+export default ListItems;
