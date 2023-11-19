@@ -7,7 +7,7 @@ import {
 
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Layout from './components/Layout/Layout';
-import Details from './pages/Details';
+import Details from './pages/Details/Details';
 import Root from './components/Root';
 import './index.css';
 import NotFoundPage from './components/ErrorBoundary/NotFoundPage';

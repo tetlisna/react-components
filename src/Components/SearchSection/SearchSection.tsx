@@ -11,13 +11,15 @@ const SearchSection = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { searchQuery, isError } = useAppSelector(
-    (state: RootState) => state.items
-  );
+  const { searchQuery } = useAppSelector((state: RootState) => state.items);
 
   const handleClick = () => {
-    dispatch(setError());
-    console.log(isError, 'error clicked');
+    try {
+      throw new Error('Simulated error');
+    } catch (error) {
+      dispatch(setError());
+      console.error(error);
+    }
   };
 
   useEffect(() => {

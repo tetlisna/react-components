@@ -1,9 +1,10 @@
 import { NavLink, useParams } from 'react-router-dom';
-import Loading from '../components/Loading/Loading';
-import { useItemDetailQuery } from '../services/items-api-slice';
-import { useAppDispatch } from '../hooks/redux';
+import Loading from '../../components/Loading/Loading';
+import { useItemDetailQuery } from '../../services/items-api-slice';
+import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
-import { setData } from '../store/reducers/ItemsSlice';
+import { setData } from '../../store/reducers/ItemsSlice';
+import './Details.css';
 
 const Details = () => {
   const dispatch = useAppDispatch();
@@ -26,18 +27,18 @@ const Details = () => {
       ) : (
         <article className="details-card" data-testid="item-card">
           <NavLink to=".." className="close-btn"></NavLink>
-          <h2 data-testid="name">{data!.name}</h2>
+          <h2 data-testid="name">{data.name}</h2>
           <p data-testid="eye_color">
             <strong>Eye color: </strong>
-            {data!.eye_color}
+            {data.eye_color}
           </p>
           <p data-testid="gender">
             <strong>Gender: </strong>
-            {data!.gender}
+            {data.gender}
           </p>
           <p data-testid="birth_year">
             <strong>Birth year: </strong>
-            {data!.birth_year}
+            {data.birth_year}
           </p>
         </article>
       )}

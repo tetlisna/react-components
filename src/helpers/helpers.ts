@@ -9,7 +9,14 @@ export const searchByQuery = (
   );
 };
 
-export const paginate = (
+export const paginate = (data: ItemIterface[] | [], itemsPerPage: number) => {
+  const totalCount = data.length;
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  return pages;
+};
+
+export const slicedList = (
   data: ItemIterface[] | [],
   page: number,
   itemsPerPage: number

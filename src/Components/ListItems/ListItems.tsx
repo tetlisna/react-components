@@ -5,9 +5,8 @@ import { ItemIterface } from '../../models/interfaces/interfaces';
 import { useItemsListQuery } from '../../services/items-api-slice';
 import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
-import Pagination from '../Pagination/Pagination';
 import { RootState } from '../../store/store';
-import { searchByQuery, paginate } from '../../helpers/helpers';
+import { searchByQuery, slicedList } from '../../helpers/helpers';
 
 const ListItems = () => {
   const { data = [], isLoading, isError } = useItemsListQuery(true);
@@ -19,11 +18,10 @@ const ListItems = () => {
 
   let searchedItems = searchByQuery(data, searchQuery);
 
-  searchedItems = paginate(searchedItems, Number(page) || 1, itemsPerPage);
+  searchedItems = slicedList(searchedItems, Number(page) || 1, itemsPerPage);
 
   return (
     <>
-      <Pagination />
       <div className="items-container" data-testid="items-container">
         {!isLoading && !isError ? (
           <>

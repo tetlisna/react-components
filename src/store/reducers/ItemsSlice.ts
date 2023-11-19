@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
 
 export interface ItemsState {
   data: [];
@@ -6,8 +7,11 @@ export interface ItemsState {
   isLoading: boolean;
   isError: boolean;
   totalCount: number;
+  totalPages: number;
   searchQuery: string;
   itemsPerPage: number;
+  currentPage: number;
+  searchedItems: [];
 }
 const initialState: ItemsState = {
   searchQuery: localStorage.getItem('searchQuery') || '',
@@ -16,7 +20,10 @@ const initialState: ItemsState = {
   isLoading: true,
   isError: false,
   totalCount: 0,
-  itemsPerPage: 10,
+  totalPages: 0,
+  itemsPerPage: ITEMS_PER_PAGE.Ten,
+  currentPage: 1,
+  searchedItems: [],
 };
 
 export const ItemsSlice = createSlice({
@@ -38,11 +45,20 @@ export const ItemsSlice = createSlice({
     setTotalCount: (state, action: PayloadAction<number>) => {
       state.totalCount = action.payload;
     },
+    setTotalPages: (state, action: PayloadAction<number>) => {
+      state.totalPages = action.payload;
+    },
     setItemsPerPage: (state, action: PayloadAction<number>) => {
       state.itemsPerPage = action.payload;
     },
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+    setSearchedItems: (state, action: PayloadAction<[]>) => {
+      state.searchedItems = action.payload;
     },
   },
 });
@@ -51,8 +67,10 @@ export const {
   setData,
   setError,
   setTotalCount,
+  setTotalPages,
   setItemsPerPage,
   setSearchQuery,
+  setCurrentPage,
 } = ItemsSlice.actions;
 
 export default ItemsSlice.reducer;

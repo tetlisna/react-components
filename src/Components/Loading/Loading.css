@@ -6,6 +6,7 @@
   border-radius: 50%;
   border-top: 0.5rem solid #a3a3f5;
   animation: spinner 1.5s linear infinite;
+  margin: 1rem;
 }
 @keyframes spinner {
   0% {
