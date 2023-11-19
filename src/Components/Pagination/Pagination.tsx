@@ -1,3 +1,4 @@
+// import { ChangeEvent, useEffect } from 'react';
 import { ChangeEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
@@ -20,6 +21,10 @@ const Pagination = () => {
   const { totalCount, itemsPerPage } = useAppSelector(
     (state: RootState) => state.items
   );
+  // useEffect(() => {
+  //   dispatch(setItemsPerPage(Number(10)));
+  // }, [dispatch]);
+
   const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLSelectElement>) {

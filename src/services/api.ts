@@ -18,6 +18,7 @@ export const fetchAllData = async (
   if (params.id) {
     query = `${API_URL_PEOPLE}/${params.id}`;
   }
+
   const res = await fetch(query, {
     method: 'GET',
     headers: {
@@ -38,4 +39,21 @@ export const fetchAllData = async (
 
   const allData = pages.flat();
   return allData;
+};
+
+export const fetchData = async (params: IParams) => {
+  let query = addQueryParams(API_URL_PEOPLE, params);
+  if (params.id) {
+    query = `${API_URL_PEOPLE}/${params.id}`;
+  }
+
+  const res = await fetch(query, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const item = await res.json();
+
+  return item;
 };

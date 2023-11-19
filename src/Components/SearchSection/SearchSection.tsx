@@ -11,12 +11,13 @@ const SearchSection = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const searchQuery = useAppSelector(
-    (state: RootState) => state.items.searchQuery
+  const { searchQuery, isError } = useAppSelector(
+    (state: RootState) => state.items
   );
 
   const handleClick = () => {
     dispatch(setError());
+    console.log(isError, 'error clicked');
   };
 
   useEffect(() => {

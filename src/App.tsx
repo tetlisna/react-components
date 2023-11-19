@@ -11,21 +11,26 @@ import Details from './pages/Details';
 import Root from './components/Root';
 import './index.css';
 import NotFoundPage from './components/ErrorBoundary/NotFoundPage';
+import { Routes } from './models/interfaces/constants';
 
 export const routes = createRoutesFromElements(
-  <Route path="/" element={<Layout />} errorElement={<ErrorBoundary />}>
-    <Route path="/" element={<Root />} />
-    <Route path="page/" element={<Root />}>
-      <Route path="details/:id" element={<Details />} />
+  <Route
+    path={Routes.index}
+    element={<Layout />}
+    errorElement={<ErrorBoundary />}
+  >
+    <Route path={Routes.index} element={<Root />} />
+    <Route path={Routes.page} element={<Root />}>
+      <Route path={Routes.details} element={<Details />} />
     </Route>
-    <Route path="page/:page" element={<Root />}>
-      <Route path="details/:id" element={<Details />} />
+    <Route path={Routes.pagePage} element={<Root />}>
+      <Route path={Routes.details} element={<Details />} />
     </Route>
-    <Route path="*" element={<NotFoundPage />} />
+    <Route path={Routes.all} element={<NotFoundPage />} />
   </Route>
 );
 const App = () => {
-  const router = createBrowserRouter(routes, { basename: '/react-components' });
+  const router = createBrowserRouter(routes, { basename: Routes.basename });
 
   return <RouterProvider router={router} />;
 };

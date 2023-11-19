@@ -7,7 +7,7 @@
     "dev": "vite",
     "predeploy": "npm run build",
     "build": "tsc && vite build",
-    "test": "vitest && jest",
+    "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier --write .",

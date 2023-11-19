@@ -13,4 +13,9 @@ export const enum Routes {
   index = '/',
   list = '/list',
   id = ':id',
+  page = 'page/',
+  pagePage = 'page/:page',
+  details = 'details/:id',
+  all = '*',
+  basename = '/react-components',
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { fetchAllData } from './api';
+import { fetchAllData, fetchData } from './api';
 
 function simulateLoading() {
   return new Promise((resolve) => setTimeout(resolve, 500));
@@ -17,7 +17,7 @@ export const api = createApi({
     itemDetail: build.query({
       async queryFn(id) {
         await simulateLoading();
-        return { data: await fetchAllData({ id }) };
+        return { data: await fetchData({ id }) };
       },
     }),
   }),
