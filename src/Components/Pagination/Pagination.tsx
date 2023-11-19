@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
 import './Pagination.css';
@@ -9,23 +9,20 @@ import {
 } from '../../store/reducers/ItemsSlice';
 import { useItemsListQuery } from '../../services/items-api-slice';
 import { RootState } from '../../store/store';
-import { paginate } from '../../helpers/helpers';
+import { paginate, searchByQuery } from '../../helpers/helpers';
 
 const Pagination = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { itemsPerPage, totalPages } = useAppSelector(
+  const { itemsPerPage, totalPages, searchQuery } = useAppSelector(
     (state: RootState) => state.items
   );
 
-  const { data = [] } = useItemsListQuery(true);
+  let { data = [] } = useItemsListQuery(true);
+  data = searchByQuery(data, searchQuery);
 
   const pagesList = paginate(data, itemsPerPage);
-
-  useEffect(() => {
-    dispatch(setItemsPerPage(Number(ITEMS_PER_PAGE.Ten)));
-  }, [dispatch, useItemsListQuery]);
 
   function handleChange(e: ChangeEvent<HTMLSelectElement>) {
     const perPage = Number(e.target.value);
