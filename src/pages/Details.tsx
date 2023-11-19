@@ -1,47 +1,43 @@
-import { useEffect, useState } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
-import { fetchData } from 'services/api';
-import { ItemIterface } from 'interfaces/interfaces';
-import Loading from 'components/Loading/Loading';
+import { NavLink } from 'react-router-dom';
+import Loading from '../components/Loading/Loading';
+import { useItemDetailQuery } from '../services/items-api-slice';
+import { useAppDispatch } from '../hooks/redux';
+import { useEffect } from 'react';
+import { setData } from '../store/reducers/ItemsSlice';
 
 const Details = () => {
-  const { id } = useParams();
+  const dispatch = useAppDispatch();
+
+  // const { id } = useParams();
+
   useEffect(() => {
-    fetchedPeople(id);
-  }, [id]);
+    handleData();
+  }, [dispatch]);
 
-  const [person, setPerson] = useState(null as ItemIterface | null);
-  const [isLoading, setIsLoading] = useState(true);
+  const handleData = async () => {
+    dispatch(setData([]));
+  };
+  const { data = [], isLoading, isError } = useItemDetailQuery('');
 
-  async function fetchedPeople(id: string | null = ''): Promise<void> {
-    try {
-      const data = await fetchData<ItemIterface>({ id: Number(id) || 1 });
-
-      setPerson(data);
-      setIsLoading(false);
-    } catch (error) {
-      throw new Error();
-    }
-  }
   return (
     <div className="details">
-      {isLoading ? (
+      {isLoading && !isError ? (
         <Loading />
       ) : (
-        <article className="details-card">
+        <article className="details-card" data-testid="item-card">
           <NavLink to=".." className="close-btn"></NavLink>
-          <h3>{person!.name}</h3>
-          <p>
+          <h2 data-testid="name">{data[1]!.name}</h2>
+          <p data-testid="eye_color">
             <strong>Eye color: </strong>
-            {person!.eye_color}
+            {data[1]!.eye_color}
           </p>
-          <p>
+          <p data-testid="gender">
             <strong>Gender: </strong>
-            {person!.gender}
+            {data[1]!.gender}
           </p>
-          <p>
+          <p data-testid="birth_year">
             <strong>Birth year: </strong>
-            {person!.birth_year}
+            {data[1]!.birth_year}
           </p>
         </article>
       )}

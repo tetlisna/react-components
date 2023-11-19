@@ -4,10 +4,16 @@
 }
 .items-container {
   display: grid;
-    position: relative;
-
+  position: relative;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+  /* display: flex;
+     justify-content: space-between;
+    flex: 1;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem; */
 }
 #overlay {
   display: block;

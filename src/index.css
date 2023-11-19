@@ -59,7 +59,6 @@ html body {
   position: relative;
   margin: 0 6rem;
   padding: 2rem 2rem;
-  /* border: dashed 0.2rem #ccc; */
   background-color: var(--light);
 }
 .close-btn {

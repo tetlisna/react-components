@@ -9,3 +9,8 @@ export enum ITEMS_PER_PAGE {
   TwentyFive = 25,
   Forty = 40,
 }
+export const enum Routes {
+  index = '/',
+  list = '/list',
+  id = ':id',
+}

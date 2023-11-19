@@ -1,26 +1,37 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import './SearchSection.css';
 import { FaSistrix } from 'react-icons/fa';
-import { RootContext } from 'context/context';
+import { setError, setSearchQuery } from '../../store/reducers/ItemsSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { FormEvent } from 'react';
+import { RootState } from '../../store/store';
 
 const SearchSection = () => {
-  const [state, setState] = useState({
-    searchQuery: '',
-    hasError: false,
-  });
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const { searchQuery, handleSubmit } = useContext(RootContext);
+  const searchQuery = useAppSelector(
+    (state: RootState) => state.items.searchQuery
+  );
+
   const handleClick = () => {
-    setState((prevState) => ({ ...prevState, hasError: true }));
+    dispatch(setError());
   };
 
   useEffect(() => {
-    if (state.hasError) throw new Error();
-    setState({
-      searchQuery: localStorage.getItem('searchQuery') || '',
-      hasError: false,
-    });
-  }, [state.hasError]);
+    handleClick();
+  }, [dispatch]);
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const target = event.target as typeof event.target & {
+      search: { value: string };
+    };
+    localStorage.setItem('searchQuery', target.search.value.trim());
+    dispatch(setSearchQuery(target.search.value.trim()));
+    navigate('/page');
+  };
 
   return (
     <section className="search-container">

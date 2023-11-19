@@ -1,23 +1,23 @@
 import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
 interface IState {
-  hasError: boolean;
+  isError: boolean;
   errorMessage: string;
 }
 
 class ErrorBoundary extends Component<PropsWithChildren, IState> {
   constructor(props: PropsWithChildren) {
     super(props);
-    this.state = { hasError: false, errorMessage: '' };
+    this.state = { isError: false, errorMessage: '' };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary caught an error: ', error, errorInfo);
-    this.setState({ hasError: true, errorMessage: error.message });
+    this.setState({ isError: true, errorMessage: error.message });
   }
 
   render(): ReactNode {
-    if (this.state.hasError) {
+    if (this.state.isError) {
       return (
         <div>
           <h1>Something went wrong.</h1> {this.state.errorMessage}

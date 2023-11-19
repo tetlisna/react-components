@@ -4,6 +4,10 @@
   padding-left: 1rem;
   gap: 1rem;
 }
+select {
+  width: 40px;
+  height: 40px;
+}
 
 .pagination select {
   border: solid 3px rgb(204, 166, 238);

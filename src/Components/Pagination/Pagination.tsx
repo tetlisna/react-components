@@ -1,21 +1,33 @@
-import { ChangeEventHandler } from 'react';
-import '../Pagination/Pagination.css';
-import { NavLink } from 'react-router-dom';
-import { ITEMS_PER_PAGE } from 'interfaces/constants';
+import { ChangeEvent } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
+import './Pagination.css';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+  setItemsPerPage,
+  setTotalCount,
+} from '../../store/reducers/ItemsSlice';
+import { useItemsListQuery } from '../../services/items-api-slice';
+import { RootState } from '../../store/store';
 
-type Props = {
-  totalCount: number;
-  pageNumber: number;
-  itemsPerPage: number;
-  handleChange: ChangeEventHandler<HTMLSelectElement>;
-};
-
-const Pagination = ({ totalCount, itemsPerPage, handleChange }: Props) => {
+const Pagination = () => {
   function getPages() {
     const totalPages = Math.ceil(totalCount / itemsPerPage);
     return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
+  const { data = [] } = useItemsListQuery(true);
+  const dispatch = useAppDispatch();
+  const { totalCount, itemsPerPage } = useAppSelector(
+    (state: RootState) => state.items
+  );
+  const navigate = useNavigate();
 
+  function handleChange(e: ChangeEvent<HTMLSelectElement>) {
+    const perPage = Number(e.target.value);
+    dispatch(setItemsPerPage(Number(perPage)));
+    dispatch(setTotalCount(Number(data.length)));
+    navigate('/page');
+  }
   return (
     <nav>
       <ul className="pagination">
@@ -31,7 +43,7 @@ const Pagination = ({ totalCount, itemsPerPage, handleChange }: Props) => {
 
         {getPages().map((page) => (
           <li key={page}>
-            <NavLink className="pagination-item" to={`/list-item/${page}`}>
+            <NavLink className="pagination-item" to={`/page/${page}`}>
               {page}
             </NavLink>
           </li>

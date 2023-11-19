@@ -1,7 +1,7 @@
-import { NavBar } from 'components/NavBar/Navbar';
+import { Outlet } from 'react-router';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import './Layout.css';
-import { Outlet } from 'react-router-dom';
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import { NavBar } from '../NavBar/NavBar';
 
 const Layout = () => {
   return (

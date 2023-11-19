@@ -4,7 +4,6 @@ export interface ItemIterface {
   gender: string;
   eye_color: string;
   birth_year: string;
-  films: string[];
 }
 export interface ItemsList {
   next: string | null;
@@ -16,5 +15,6 @@ export interface IParams {
   search?: string | '';
   page?: number;
   id?: number;
-  hasError?: boolean;
+  isError?: boolean;
+  itemsPerPage?: number;
 }
