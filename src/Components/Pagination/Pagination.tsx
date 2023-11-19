@@ -1,5 +1,5 @@
-// import { ChangeEvent, useEffect } from 'react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
+// import { ChangeEvent } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
 import './Pagination.css';
@@ -16,14 +16,14 @@ const Pagination = () => {
     const totalPages = Math.ceil(totalCount / itemsPerPage);
     return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
-  const { data = [] } = useItemsListQuery(true);
   const dispatch = useAppDispatch();
   const { totalCount, itemsPerPage } = useAppSelector(
     (state: RootState) => state.items
   );
-  // useEffect(() => {
-  //   dispatch(setItemsPerPage(Number(10)));
-  // }, [dispatch]);
+  const { data = [] } = useItemsListQuery(true);
+  useEffect(() => {
+    dispatch(setItemsPerPage(Number(10)));
+  }, [dispatch, useItemsListQuery]);
 
   const navigate = useNavigate();
 
