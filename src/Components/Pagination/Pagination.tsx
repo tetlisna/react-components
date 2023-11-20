@@ -19,7 +19,7 @@ const Pagination = () => {
     (state: RootState) => state.items
   );
 
-  let { data = [] } = useItemsListQuery(true);
+  let { data = [] } = useItemsListQuery();
   data = searchByQuery(data, searchQuery);
 
   const pagesList = paginate(data, itemsPerPage);

@@ -18,13 +18,15 @@ const Details = () => {
   const handleData = () => {
     dispatch(setData([]));
   };
-  const { data, isLoading, isError } = useItemDetailQuery(id);
+  const { data, isLoading, isError } = useItemDetailQuery(Number(id));
+
+  console.log({ data, isLoading });
 
   return (
     <div className="details">
       {isLoading && !isError ? (
         <Loading />
-      ) : (
+      ) : data ? (
         <article className="details-card" data-testid="item-card">
           <NavLink to=".." className="close-btn"></NavLink>
           <h2 data-testid="name">{data.name}</h2>
@@ -41,6 +43,8 @@ const Details = () => {
             {data.birth_year}
           </p>
         </article>
+      ) : (
+        ''
       )}
     </div>
   );

@@ -9,7 +9,7 @@ import { RootState } from '../../store/store';
 import { searchByQuery, slicedList } from '../../helpers/helpers';
 
 const ListItems = () => {
-  const { data = [], isLoading, isError } = useItemsListQuery(true);
+  const { data = [], isLoading, isError } = useItemsListQuery();
   const { page, id } = useParams();
 
   const { searchQuery, itemsPerPage } = useAppSelector(

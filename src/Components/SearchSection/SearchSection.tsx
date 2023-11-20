@@ -6,25 +6,23 @@ import { setError, setSearchQuery } from '../../store/reducers/ItemsSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { FormEvent } from 'react';
 import { RootState } from '../../store/store';
+import NotFoundPage from '../ErrorBoundary/NotFoundPage';
 
 const SearchSection = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { searchQuery } = useAppSelector((state: RootState) => state.items);
-
-  const handleClick = () => {
-    try {
-      throw new Error('Simulated error');
-    } catch (error) {
-      dispatch(setError());
-      console.error(error);
-    }
-  };
+  const { searchQuery, isError } = useAppSelector(
+    (state: RootState) => state.items
+  );
 
   useEffect(() => {
     handleClick();
   }, [dispatch]);
+
+  const handleClick = () => {
+    dispatch(setError());
+  };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -36,7 +34,7 @@ const SearchSection = () => {
     navigate('/page');
   };
 
-  return (
+  return isError ? (
     <section className="search-container">
       <h1>React Search</h1>
       <form onSubmit={handleSubmit}>
@@ -59,6 +57,8 @@ const SearchSection = () => {
         Click to throw error
       </button>
     </section>
+  ) : (
+    <NotFoundPage />
   );
 };
 
