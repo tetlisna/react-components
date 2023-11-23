@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import './SearchSection.css';
 import { FaSistrix } from 'react-icons/fa';
@@ -6,14 +6,14 @@ import { setError, setSearchQuery } from '../../store/reducers/ItemsSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { FormEvent } from 'react';
 import { RootState } from '../../store/store';
-import NotFoundPage from '../ErrorBoundary/NotFoundPage';
 
 const SearchSection = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState<string>('');
 
-  const { searchQuery, isError } = useAppSelector(
-    (state: RootState) => state.items
+  const searchQuery = useAppSelector(
+    (state: RootState) => state.items.searchQuery || ''
   );
 
   useEffect(() => {
@@ -24,17 +24,18 @@ const SearchSection = () => {
     dispatch(setError());
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const target = event.target as typeof event.target & {
-      search: { value: string };
-    };
-    localStorage.setItem('searchQuery', target.search.value.trim());
-    dispatch(setSearchQuery(target.search.value.trim()));
     navigate('/page');
+    if (searchInput) {
+      localStorage.setItem('searchQuery', searchInput.trim());
+      dispatch(setSearchQuery(searchInput));
+    } else {
+      dispatch(setSearchQuery(''));
+    }
   };
 
-  return isError ? (
+  return (
     <section className="search-container">
       <h1>React Search</h1>
       <form onSubmit={handleSubmit}>
@@ -47,18 +48,14 @@ const SearchSection = () => {
             className="search-input"
             aria-label="search"
             defaultValue={searchQuery}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
         <button type="submit" className="search-btn">
           Search
         </button>
       </form>
-      <button type="button" onClick={handleClick} className="search-btn">
-        Click to throw error
-      </button>
     </section>
-  ) : (
-    <NotFoundPage />
   );
 };
 

@@ -13,7 +13,7 @@ export const Item = (props: ItemIterface) => {
   page = page || '1';
 
   return (
-    <article className="item-card" data-testid="item-card">
+    <article className="item-card" data-testid="items-card">
       <NavLink to={`/page/${page}/details/${heroIdNum}`}>
         <button className="article-btn" data-testid="details-btn">
           Details
