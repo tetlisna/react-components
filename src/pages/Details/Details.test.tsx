@@ -44,19 +44,6 @@ describe('Details', async () => {
       };
     });
 
-    //     render(
-    //       <Provider store={store}>
-    //         <MemoryRouter initialEntries={[`/details/1`]}>
-    //           <Details />
-    //         </MemoryRouter>
-    //       </Provider>
-    //     );
-
-    //     const loading = await screen.findByTestId('loading');
-    //     expect(loading).toBeInTheDocument();
-    //     cleanup();
-    // });
-
     it('should display details', async () => {
       vi.mock('../../services/items-api-slice.ts', async (importOriginal) => {
         const mod =

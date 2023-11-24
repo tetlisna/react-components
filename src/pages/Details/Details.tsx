@@ -20,8 +20,6 @@ const Details = () => {
   };
   const { data, isLoading, isError } = useItemDetailQuery(Number(id));
 
-  console.log({ data, isLoading });
-
   return (
     <div className="details">
       {isLoading && !isError ? (
