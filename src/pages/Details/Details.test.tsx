@@ -28,7 +28,7 @@ vi.mock('react-router-dom', async (importOriginal) => {
 });
 
 describe('Details', async () => {
-  it('should return loading state while fetching data', async () => {
+  it('should hide detail after close btn clicked', async () => {
     vi.mock('../../services/items-api-slice.ts', async (importOriginal) => {
       const mod =
         await importOriginal<

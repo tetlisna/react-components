@@ -1,4 +1,4 @@
-import { useParams, Outlet } from 'react-router';
+import { useParams } from 'react-router';
 import { useAppSelector } from '../../hooks/redux';
 import { Link } from 'react-router-dom';
 import { ItemIterface } from '../../models/interfaces/interfaces';
@@ -38,7 +38,6 @@ const ListItems = () => {
           <Loading />
         )}
       </div>
-      <Outlet />
     </>
   );
 };
