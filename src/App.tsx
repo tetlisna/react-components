@@ -4,27 +4,34 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import Root from 'components/Root';
 
-import Details from 'pages/Details';
-import Layout from 'components/Layout/Layout';
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Layout from './components/Layout/Layout';
+import Details from './pages/Details/Details';
+import Root from './components/Root/Root';
+import './index.css';
+import NotFoundPage from './components/ErrorBoundary/NotFoundPage';
+import { Routes } from './models/interfaces/constants';
+
+export const routes = createRoutesFromElements(
+  <Route
+    path={Routes.index}
+    element={<Layout />}
+    errorElement={<ErrorBoundary />}
+  >
+    <Route path={Routes.index} element={<Root />} />
+    <Route path={Routes.page} element={<Root />}>
+      <Route path={Routes.details} element={<Details />} />
+    </Route>
+    <Route path={Routes.pagePage} element={<Root />}>
+      <Route path={Routes.details} element={<Details />} />
+    </Route>
+    <Route path={Routes.all} element={<NotFoundPage />} />
+  </Route>
+);
 
 const App = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<Layout />} errorElement={<ErrorBoundary />}>
-        <Route path="/" element={<Root />} />
-        <Route path="list-item/" element={<Root />}>
-          <Route path="details/:id" element={<Details />} />
-        </Route>
-        <Route path="list-item/:page" element={<Root />}>
-          <Route path="details/:id" element={<Details />} />
-        </Route>
-        <Route path="*" element={<ErrorBoundary />} />
-      </Route>
-    )
-  );
+  const router = createBrowserRouter(routes, { basename: Routes.basename });
 
   return <RouterProvider router={router} />;
 };

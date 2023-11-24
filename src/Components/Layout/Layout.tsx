@@ -1,15 +1,12 @@
-import { NavBar } from 'components/NavBar/Navbar';
-import './Layout.css';
-import { Outlet } from 'react-router-dom';
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import { Outlet } from 'react-router';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { NavBar } from '../NavBar/NavBar';
 
 const Layout = () => {
   return (
     <ErrorBoundary>
-      <div className="container">
-        <NavBar />
-        <Outlet />
-      </div>
+      <NavBar />
+      <Outlet />
     </ErrorBoundary>
   );
 };
