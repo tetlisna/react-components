@@ -4,28 +4,26 @@
   padding-left: 1rem;
   gap: 1rem;
 }
-select {
+
+.select {
   width: 40px;
   height: 40px;
 }
 
-.pagination select {
+.pagination .select {
   border: solid 3px rgb(204, 166, 238);
   border-radius: 50%;
   outline: none;
   background: transparent;
 }
-.pagination select:hover,
-.pagination select {
+
+.pagination .select:hover,
+.pagination .select {
   line-height: 40px;
   background-color: rgb(204, 166, 238);
 }
 
-.pagination li {
-  list-style: none;
-}
-
-.pagination-item {
+.paginationItem {
   text-align: center;
   line-height: 40px;
   display: inline-block;
@@ -36,11 +34,7 @@ select {
   border-radius: 50%;
 }
 
-.pagination-item.active {
-  text-decoration: none;
-  background-color: rgb(204, 166, 238);
-}
-
-.pagination-item:hover {
+.paginationItem.active,
+.paginationItem:hover {
   background-color: rgb(204, 166, 238);
 }

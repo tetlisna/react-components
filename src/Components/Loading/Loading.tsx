@@ -1,7 +1,7 @@
-import './Loading.css';
+import styles from './Loading.module.css';
 
 const Loading = () => {
-  return <div className="loading-spinner" data-testid="loading"></div>;
+  return <div className={styles.loadingSpinner} data-testid="loading"></div>;
 };
 
 export default Loading;

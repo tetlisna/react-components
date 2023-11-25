@@ -1,7 +1,9 @@
-import { NavLink, useParams } from 'react-router-dom';
-import { IMAGE_URL } from '../../models/interfaces/constants';
-import { ItemIterface } from '../../models/interfaces/interfaces';
-import './Item.css';
+import NavLink from 'next/link';
+import { useParams } from 'react-router-dom';
+import { IMAGE_URL } from '@/models/interfaces/constants';
+import { ItemIterface } from '@/models/interfaces/interfaces';
+import styles from './Item.module.css';
+// import { NextPage } from 'next';
 
 export const Item = (props: ItemIterface) => {
   const { name, url, eye_color, birth_year, gender } = props;
@@ -13,16 +15,16 @@ export const Item = (props: ItemIterface) => {
   page = page || '1';
 
   return (
-    <article className="item-card" data-testid="items-card">
-      <NavLink to={`/page/${page}/details/${heroIdNum}`}>
-        <button className="article-btn" data-testid="details-btn">
+    <article className={styles.itemCard} data-testid={styles.itemsCard}>
+      <NavLink href={`/page/${page}/details/${heroIdNum}`}>
+        <button className={styles.articleBtn} data-testid="details-btn">
           Details
         </button>
       </NavLink>
       <img
         src={`${IMAGE_URL}/${heroIdNum}.jpg`}
         alt={'Photo of ' + name}
-        className="item-image"
+        className={styles.itemImage}
       />
       <h2 data-testid="name">{name}</h2>
       <p data-testid="eye_color">

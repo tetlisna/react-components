@@ -7,8 +7,8 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import { store } from '../../store/store';
-import Details from './Details';
+import { store } from '../../store/store.ts';
+import Details from './Details.tsx';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { ItemMock } from '../../test/mocks/itemMock.ts';

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import './SearchSection.css';
+// import { useNavigate } from 'react-router';
+// import { useRouter } from 'next/router';
+import styles from './SearchSection.module.css';
 import { FaSistrix } from 'react-icons/fa';
-import { setError, setSearchQuery } from '../../store/reducers/ItemsSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { setError, setSearchQuery } from '@/_store/reducers/ItemsSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { FormEvent } from 'react';
-import { RootState } from '../../store/store';
+import { RootState } from '@/_store/store';
 
 const SearchSection = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useRouter();
   const [searchInput, setSearchInput] = useState<string>('');
 
   const searchQuery = useAppSelector(
@@ -26,7 +27,7 @@ const SearchSection = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate('/page');
+    // navigate('/page');
     if (searchInput) {
       localStorage.setItem('searchQuery', searchInput.trim());
       dispatch(setSearchQuery(searchInput));
@@ -36,22 +37,22 @@ const SearchSection = () => {
   };
 
   return (
-    <section className="search-container">
+    <section className={styles.searchContainer}>
       <h1>React Search</h1>
       <form onSubmit={handleSubmit}>
-        <div className="search-icon-wrapper">
-          <FaSistrix className="search-icon" />
+        <div className={styles.searchIconWrapper}>
+          <FaSistrix className={styles.searchIcon} />
           <input
             placeholder="Search..."
             name="search"
             type="search"
-            className="search-input"
+            className={styles.searchInput}
             aria-label="search"
             defaultValue={searchQuery}
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        <button type="submit" className="search-btn">
+        <button type="submit" className={styles.searchBtn}>
           Search
         </button>
       </form>

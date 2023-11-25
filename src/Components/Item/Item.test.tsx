@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { ItemMock, ItemListMock } from '../../test/mocks/itemMock';
+import { ItemMock, ItemListMock } from '../../test/mocks/itemMock.ts';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { store } from '@/_store/store.ts';
 import { Item } from './Item.tsx';
 
 describe('Tests for the Item component', () => {
@@ -30,7 +30,7 @@ describe('Tests for the Item component', () => {
         </MemoryRouter>
       </Provider>
     );
-    const detailsBtn = await screen.findByTestId('details-btn');
+    const detailsBtn = await screen.findByTestId('detailsBtn');
     await waitFor(() => {
       expect(detailsBtn).toBeInTheDocument();
       expect(screen.getByTestId('name')).toHaveTextContent(ItemMock.name);

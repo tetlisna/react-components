@@ -14,7 +14,11 @@ export interface ItemsState {
   searchedItems: [];
 }
 const initialState: ItemsState = {
-  searchQuery: localStorage.getItem('searchQuery') || '',
+  searchQuery:
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('searchQuery') || ''
+      : '',
+  // searchQuery: localStorage.getItem('searchQuery') || '',
   data: [],
   dataAll: [],
   isLoading: true,

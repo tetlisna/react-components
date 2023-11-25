@@ -14,18 +14,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "allowJs": false,
-    "baseUrl": ".",
+    "jsx": "preserve",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
     "paths": {
-      "src/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
+    "plugins": [{ "name": "next" }],
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [".eslintrc.cjs", "src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    ".eslintrc.cjs",
+    "src",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts"
+  ],
+  "exclude": ["./node_modules"]
 }

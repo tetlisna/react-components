@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "predeploy": "npm run build",
-    "build": "tsc && vite build",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "next lint",
     "format:fix": "prettier --write .",
-    "preview": "vite preview",
+    "preview": "next preview",
     "prepare": "husky install",
     "deploy": "gh-pages -d dist",
     "pre-push": "npm run test"
@@ -26,6 +27,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react-redux": "^7.1.30",
+    "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",

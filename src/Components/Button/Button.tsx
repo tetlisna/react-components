@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styles from './Button.module.css';
 
 export interface IButton {
   value: string;
@@ -8,10 +9,12 @@ export interface IButton {
   addClass?: string;
 }
 
-const Button: FC<IButton> = ({ value, type, handler, disabled, addClass }) => {
+const Button: FC<IButton> = ({ value, type, handler, disabled }) => {
   return (
     <button
-      className={`button ${addClass || ''}`}
+      // className={`button ${addClass || ''}`}
+      className={styles.button}
+      // className={`${styles.button} ${addClass || ''}`}
       onClick={handler}
       type={type}
       disabled={disabled}

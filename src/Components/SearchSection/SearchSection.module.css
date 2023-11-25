@@ -1,4 +1,4 @@
-.search-input {
+.searchInput {
   margin: 1rem 0;
   width: 200px;
   border-radius: 8px;
@@ -11,26 +11,26 @@
   transition: border-color 0.25s;
 }
 
-.search-btn {
+.searchBtn {
   border: 1px solid #d3cffa;
   background-color: #fff;
   margin-bottom: 1rem;
 }
 
-.search-btn:hover {
+.searchBtn:hover {
   background-color: #b4a4f4;
   transition: 500ms;
 }
 
-.search-btn:active {
+.searchBtn:active {
   transform: translateY(-20%);
 }
 
-.search-icon-wrapper {
+.searchIconWrapper {
   position: relative;
 }
 
-.search-icon {
+.searchIcon {
   position: absolute;
   width: 30px;
   top: 50%;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
-import './ErrorButton.css';
+import styles from './ErrorButton.module.css';
 
 const ErrorButton = () => {
   const [isError, setIsError] = useState(false);
@@ -10,16 +10,17 @@ const ErrorButton = () => {
   };
 
   if (isError) {
-    throw new Error('Error btn clicked');
-  }
+    setIsError(false);
 
+    // throw new Error('Error btn clicked');
+  }
   return (
     <Button
       type="button"
       disabled={false}
       value="Click to throw error"
       handler={handleClick}
-      addClass="search-btn"
+      addClass={styles.searchBtn}
     />
   );
 };

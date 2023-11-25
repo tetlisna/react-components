@@ -1,11 +1,11 @@
-import { NavLink } from 'react-router-dom';
-import './Navbar.css';
+import NavLink from 'next/link';
+import styles from './Navbar.module.css';
 
 export const NavBar = () => {
   return (
     <header>
       <nav>
-        <NavLink to="/" aria-label="Go to home" preventScrollReset>
+        <NavLink href="/" aria-label="Go to home" className={styles.header}>
           Home
         </NavLink>
       </nav>

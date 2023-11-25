@@ -1,4 +1,4 @@
-.item-card {
+.itemCard {
   max-width: 200px;
   padding: 0.5rem;
   position: relative;
@@ -9,7 +9,7 @@
     box-shadow 1s;
 }
 
-.item-image {
+.itemImage {
   width: 100%;
   border-radius: 10px;
   margin-top: 0.5rem;
@@ -17,16 +17,16 @@
   object-fit: cover;
 }
 
-.item-image:hover {
+.itemImage:hover {
   transform: scale(1.02) perspective(0px);
   box-shadow: 0 10px 10px rgba(147, 143, 244, 0.7);
 }
 
-.article-btn {
+.articleBtn {
   width: 100%;
   background-color: transparent;
 }
 
-.article-btn:hover {
+.articleBtn:hover {
   background-color: rgba(147, 143, 244, 0.7);
 }

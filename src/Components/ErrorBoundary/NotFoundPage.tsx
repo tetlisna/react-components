@@ -1,8 +1,10 @@
+import styles from './ErrorBoundary.module.css';
+
 const NotFoundPage = () => {
   return (
-    <section>
+    <section className={styles.NotFoundPage}>
       <h1>Oops!</h1>
-      <p>Sorry, this page doesn't exist.</p>
+      <h3>Sorry, this page doesn't exist.</h3>
     </section>
   );
 };

@@ -1,22 +1,23 @@
 import { Outlet } from 'react-router-dom';
-import ListItems from '../ListItems/ListItems';
-import Pagination from '../Pagination/Pagination';
-import SearchSection from '../SearchSection/SearchSection';
-import Wrapper from '../Wrapper/Wrapper';
-import ErrorButton from '../ErrorButton/ErrorButton';
+import ListItems from '@/components/ListItems/ListItems';
+import Pagination from '@/components/Pagination/Pagination';
+import SearchSection from '@/components/SearchSection/SearchSection';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import ErrorButton from '@/components/ErrorButton/ErrorButton';
+import styles from './Root.module.css';
 
 const Root = () => {
   return (
     <div id="sidebar">
       <Wrapper>
-        <div className="container">
-          <section className="right-section">
+        <div className={styles.container}>
+          <section className={styles.rightSection}>
             <SearchSection />
             <ErrorButton />
             <Pagination />
             <ListItems />
           </section>
-          <section className="left-section">
+          <section className={styles.leftSection}>
             <Outlet />
           </section>
         </div>

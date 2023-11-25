@@ -1,12 +1,13 @@
 import { useParams } from 'react-router';
 import { useAppSelector } from '../../hooks/redux';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ItemIterface } from '../../models/interfaces/interfaces';
 import { useItemsListQuery } from '../../services/items-api-slice';
 import { Item } from '../Item/Item';
 import Loading from '../Loading/Loading';
-import { RootState } from '../../store/store';
+import { RootState } from '@/_store/store';
 import { searchByQuery, slicedList } from '../../helpers/helpers';
+import styles from './ListItems.module.css';
 
 const ListItems = () => {
   const { data = [], isLoading, isError } = useItemsListQuery();
@@ -22,17 +23,20 @@ const ListItems = () => {
 
   return (
     <>
-      <div className="items-container" data-testid="items-container">
+      <div
+        className={styles.itemsContainer}
+        data-testid={styles.itemsContainer}
+      >
         {!isLoading && !isError ? (
           <>
             {searchedItems?.length === 0 ? (
-              <p>No items found.</p>
+              <div>No items found.</div>
             ) : (
               searchedItems?.map((person: ItemIterface) => (
                 <Item key={person.url} {...person} />
               ))
             )}
-            {id ? <Link id="overlay" to=".."></Link> : ''}
+            {id ? <Link id="overlay" href=".."></Link> : ''}
           </>
         ) : (
           <Loading />
