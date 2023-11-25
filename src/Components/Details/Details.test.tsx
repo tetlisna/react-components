@@ -7,8 +7,8 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import { store } from '../../store/store.ts';
-import Details from './Details.tsx';
+import { store } from '@/_store/store.ts';
+import Details from './[id].tsx';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { ItemMock } from '../../test/mocks/itemMock.ts';
@@ -38,7 +38,7 @@ describe('Details', async () => {
         ...mod,
         useItemDetailQuery: () => ({
           data: [],
-          isLoading: true,
+          isFetching: true,
           isError: false,
         }),
       };
@@ -54,7 +54,7 @@ describe('Details', async () => {
           ...mod,
           useItemDetailQuery: () => ({
             data: ItemMock,
-            isLoading: false,
+            isFetching: false,
             isError: false,
           }),
         };

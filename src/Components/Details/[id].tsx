@@ -1,17 +1,16 @@
 import Link from 'next/link';
-import { useParams } from 'react-router-dom';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../Loading/Loading';
 import { useItemDetailQuery } from '../../services/items-api-slice';
 import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
 import { setData } from '@/_store/reducers/ItemsSlice';
-import './Details.css';
 import styles from './Details.module.css';
+import { useRouter } from 'next/router';
 
 const Details = () => {
   const dispatch = useAppDispatch();
 
-  const { id } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     handleData();
@@ -20,11 +19,13 @@ const Details = () => {
   const handleData = () => {
     dispatch(setData([]));
   };
-  const { data, isLoading, isError } = useItemDetailQuery(Number(id));
+  const { data, isFetching, isError } = useItemDetailQuery(
+    Number(router.query.id)
+  );
 
   return (
     <div className={styles.details}>
-      {isLoading && !isError ? (
+      {isFetching && !isError ? (
         <Loading />
       ) : data ? (
         <>

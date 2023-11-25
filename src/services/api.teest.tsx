@@ -19,7 +19,6 @@ describe('renders hook', async () => {
     expect(result.current).toMatchObject({
       status: 'pending',
       endpointName: 'itemsList',
-      isLoading: true,
       isSuccess: false,
       isError: false,
       isFetching: true,
@@ -31,7 +30,6 @@ describe('renders hook', async () => {
       status: 'fulfilled',
       endpointName: 'itemsList',
       data: ItemListMock,
-      isLoading: false,
       isSuccess: true,
       isError: false,
       currentData: ItemListMock,
@@ -46,7 +44,6 @@ describe('renders hook', async () => {
     expect(result.current).toMatchObject({
       status: 'pending',
       endpointName: 'itemDetail',
-      isLoading: true,
       isSuccess: false,
       isError: false,
       isFetching: true,
@@ -57,7 +54,6 @@ describe('renders hook', async () => {
       status: 'fulfilled',
       endpointName: 'itemDetail',
       data: ItemMock,
-      isLoading: false,
       isSuccess: true,
       isError: false,
       currentData: ItemMock,

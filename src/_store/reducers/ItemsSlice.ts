@@ -4,7 +4,7 @@ import { ITEMS_PER_PAGE } from '../../models/interfaces/constants';
 export interface ItemsState {
   data: [];
   dataAll: [];
-  isLoading: boolean;
+  isFetching: boolean;
   isError: boolean;
   totalCount: number;
   totalPages: number;
@@ -21,7 +21,7 @@ const initialState: ItemsState = {
   // searchQuery: localStorage.getItem('searchQuery') || '',
   data: [],
   dataAll: [],
-  isLoading: true,
+  isFetching: true,
   isError: false,
   totalCount: 0,
   totalPages: 0,
@@ -36,15 +36,15 @@ export const ItemsSlice = createSlice({
   reducers: {
     setAllData: (state, action: PayloadAction<[]>) => {
       state.dataAll = action.payload;
-      state.isLoading = false;
+      state.isFetching = false;
     },
     setData: (state, action: PayloadAction<[]>) => {
       state.data = action.payload;
-      state.isLoading = false;
+      state.isFetching = false;
     },
     setError: (state) => {
       state.isError = true;
-      state.isLoading = false;
+      state.isFetching = false;
     },
     setTotalCount: (state, action: PayloadAction<number>) => {
       state.totalCount = action.payload;

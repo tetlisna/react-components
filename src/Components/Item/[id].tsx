@@ -1,8 +1,9 @@
-import NavLink from 'next/link';
-import { useParams } from 'react-router-dom';
+import Link from 'next/link';
+// import { useParams } from 'react-router-dom';
 import { IMAGE_URL } from '@/models/interfaces/constants';
 import { ItemIterface } from '@/models/interfaces/interfaces';
 import styles from './Item.module.css';
+import { useRouter } from 'next/router';
 // import { NextPage } from 'next';
 
 export const Item = (props: ItemIterface) => {
@@ -11,16 +12,20 @@ export const Item = (props: ItemIterface) => {
   const heroId = url.split('/');
   heroId.pop();
   const heroIdNum = heroId[heroId.length - 1];
-  let { page } = useParams();
-  page = page || '1';
+  const router = useRouter();
+  const { page } = router.query;
 
   return (
     <article className={styles.itemCard} data-testid={styles.itemsCard}>
-      <NavLink href={`/page/${page}/details/${heroIdNum}`}>
-        <button className={styles.articleBtn} data-testid="details-btn">
+      <Link
+        href={
+          page ? `/page/${page}/details/${heroIdNum}` : `/details/${heroIdNum}`
+        }
+      >
+        <button className={styles.articleBtn} data-testid="detailsBtn">
           Details
         </button>
-      </NavLink>
+      </Link>
       <img
         src={`${IMAGE_URL}/${heroIdNum}.jpg`}
         alt={'Photo of ' + name}

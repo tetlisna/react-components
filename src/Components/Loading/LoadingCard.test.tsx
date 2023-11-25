@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Details from '../../pages/Details/Details.tsx';
+import Details from '../Details/[id].tsx';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store.ts';
@@ -14,7 +14,7 @@ test('displays loading indicator while fetching data', async () => {
       ...mod,
       useItemDetailQuery: () => ({
         data: [],
-        isLoading: true,
+        isFetching: true,
         isError: false,
       }),
     };

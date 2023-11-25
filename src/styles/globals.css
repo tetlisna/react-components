@@ -63,8 +63,6 @@ body {
   flex: 1;
 }
 
-
-
 .items-container {
   display: grid;
   position: relative;
@@ -79,6 +77,6 @@ body {
   }
 
   button {
-    background-color: #f9f9f9;
+    background-color: transparent;
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import styles from './SearchSection.module.css';
 import { FaSistrix } from 'react-icons/fa';
 import { setError, setSearchQuery } from '@/_store/reducers/ItemsSlice';
@@ -10,7 +10,7 @@ import { RootState } from '@/_store/store';
 
 const SearchSection = () => {
   const dispatch = useAppDispatch();
-  // const navigate = useRouter();
+  const { push } = useRouter();
   const [searchInput, setSearchInput] = useState<string>('');
 
   const searchQuery = useAppSelector(
@@ -27,7 +27,8 @@ const SearchSection = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // navigate('/page');
+    push('/page');
+
     if (searchInput) {
       localStorage.setItem('searchQuery', searchInput.trim());
       dispatch(setSearchQuery(searchInput));

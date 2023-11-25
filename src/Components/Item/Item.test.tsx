@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { ItemMock, ItemListMock } from '../../test/mocks/itemMock.ts';
 import { Provider } from 'react-redux';
 import { store } from '@/_store/store.ts';
-import { Item } from './Item.tsx';
+import { Item } from './[id].tsx';
 
 describe('Tests for the Item component', () => {
   vi.mock('../../services/items-api-slice.ts', async (importOriginal) => {
@@ -16,7 +16,7 @@ describe('Tests for the Item component', () => {
       ...mod,
       useItemsListQuery: () => ({
         data: ItemListMock,
-        isLoading: false,
+        isFetching: false,
         isError: false,
       }),
     };
