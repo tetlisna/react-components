@@ -7,6 +7,7 @@ import { setError, setSearchQuery } from '@/_store/reducers/ItemsSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { FormEvent } from 'react';
 import { RootState } from '@/_store/store';
+import Button from '../Button/Button';
 
 const SearchSection = () => {
   const dispatch = useAppDispatch();
@@ -53,9 +54,7 @@ const SearchSection = () => {
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        <button type="submit" className={styles.searchBtn}>
-          Search
-        </button>
+        <Button type="submit" addClass={styles.searchBtn} value={'Search'} />
       </form>
     </section>
   );

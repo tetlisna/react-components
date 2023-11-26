@@ -8,11 +8,13 @@ import { RootState } from '@/_store/store';
 import { searchByQuery, slicedList } from '../../helpers/helpers';
 import styles from './ListItems.module.css';
 import { useRouter } from 'next/router';
+import Details from '../Details/[id]';
 
 const ListItems = () => {
   const { data = [], isFetching, isError } = useItemsListQuery();
   const router = useRouter();
   const page = router.query.page;
+  const id = router.query.id;
 
   const { searchQuery, itemsPerPage } = useAppSelector(
     (state: RootState) => state.items
@@ -33,7 +35,14 @@ const ListItems = () => {
               <Item key={person.url} {...person} />
             ))
           )}
-          {router.query.id ? <Link id="overlay" href=".." /> : ''}
+          {id ? (
+            <>
+              <Details />
+              <Link id="overlay" href="/" />
+            </>
+          ) : (
+            ''
+          )}
         </>
       ) : (
         <Loading />

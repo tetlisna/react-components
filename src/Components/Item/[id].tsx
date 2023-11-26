@@ -1,10 +1,9 @@
 import Link from 'next/link';
-// import { useParams } from 'react-router-dom';
 import { IMAGE_URL } from '@/models/interfaces/constants';
 import { ItemIterface } from '@/models/interfaces/interfaces';
 import styles from './Item.module.css';
 import { useRouter } from 'next/router';
-// import { NextPage } from 'next';
+import Image from 'next/image';
 
 export const Item = (props: ItemIterface) => {
   const { name, url, eye_color, birth_year, gender } = props;
@@ -26,10 +25,14 @@ export const Item = (props: ItemIterface) => {
           Details
         </button>
       </Link>
-      <img
+      <Image
         src={`${IMAGE_URL}/${heroIdNum}.jpg`}
         alt={'Photo of ' + name}
         className={styles.itemImage}
+        width={150}
+        height={150}
+        priority={true}
+        // loading="lazy"
       />
       <h2 data-testid="name">{name}</h2>
       <p data-testid="eye_color">

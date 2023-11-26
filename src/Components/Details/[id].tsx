@@ -11,6 +11,7 @@ const Details = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
+  const { page } = router.query;
 
   useEffect(() => {
     handleData();
@@ -29,7 +30,11 @@ const Details = () => {
         <Loading />
       ) : data ? (
         <>
-          <Link href=".." className={styles.closeBtn} data-testid="closeBtn" />
+          <Link
+            href={page ? `/page/${page}` : `/`}
+            className={styles.closeBtn}
+            data-testid="closeBtn"
+          />
           <article className={styles.detailsCard} data-testid="item-card">
             <h2 data-testid="name">{data.name}</h2>
             <p data-testid="eye_color">

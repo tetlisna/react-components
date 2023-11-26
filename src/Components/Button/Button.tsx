@@ -9,12 +9,10 @@ export interface IButton {
   addClass?: string;
 }
 
-const Button: FC<IButton> = ({ value, type, handler, disabled }) => {
+const Button: FC<IButton> = ({ value, type, handler, disabled, addClass }) => {
   return (
     <button
-      // className={`button ${addClass || ''}`}
-      className={styles.button}
-      // className={`${styles.button} ${addClass || ''}`}
+      className={`${styles.button} ${addClass || ''}`}
       onClick={handler}
       type={type}
       disabled={disabled}

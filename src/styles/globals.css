@@ -63,7 +63,7 @@ body {
   flex: 1;
 }
 
-.items-container {
+.itemsContainer {
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr;
@@ -79,4 +79,7 @@ body {
   button {
     background-color: transparent;
   }
+}
+.error {
+  color: red;
 }
