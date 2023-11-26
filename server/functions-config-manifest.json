@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/page/[page]":{},"/page/[page]/details":{},"/page/[page]/details/[id]":{},"/page":{}}}
+{"version":1,"functions":{"/page/[page]":{},"/page/[page]/details/[id]":{},"/page/[page]/details":{},"/page":{}}}
