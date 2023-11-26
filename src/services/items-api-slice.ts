@@ -33,3 +33,4 @@ export const api = createApi({
 });
 
 export const { useItemsListQuery, useItemDetailQuery } = api;
+export const { itemsList, itemDetail } = api.endpoints;

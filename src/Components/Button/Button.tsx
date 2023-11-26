@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import styles from './Button.module.css';
 
 export interface IButton {
   value: string;
   type: 'button' | 'submit' | 'reset';
-  handler: React.MouseEventHandler;
+  handler?: MouseEventHandler<Element> | undefined;
   disabled?: boolean;
   addClass?: string;
 }

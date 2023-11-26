@@ -32,7 +32,6 @@ export const Item = (props: ItemIterface) => {
         width={150}
         height={150}
         priority={true}
-        // loading="lazy"
       />
       <h2 data-testid="name">{name}</h2>
       <p data-testid="eye_color">
