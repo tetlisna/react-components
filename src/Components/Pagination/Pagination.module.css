@@ -1,0 +1,40 @@
+.pagination {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  gap: 1rem;
+}
+
+.select {
+  width: 40px;
+  height: 40px;
+}
+
+.pagination .select {
+  border: solid 3px rgb(204, 166, 238);
+  border-radius: 50%;
+  outline: none;
+  background: transparent;
+}
+
+.pagination .select:hover,
+.pagination .select {
+  line-height: 40px;
+  background-color: rgb(204, 166, 238);
+}
+
+.paginationItem {
+  text-align: center;
+  line-height: 40px;
+  display: inline-block;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  color: var(--text);
+  border-radius: 50%;
+}
+
+.paginationItem.active,
+.paginationItem:hover {
+  background-color: rgb(204, 166, 238);
+}

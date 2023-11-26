@@ -1,0 +1,40 @@
+.details {
+  /* display: flex;
+  justify-content: end; */
+  position: absolute;
+  margin-top: 6rem;
+  top: 0;
+  right: 0;
+  color: hsl(var(--text));
+  transform: translateX(-30%);
+}
+
+.detailsCard {
+  justify-content: end;
+  position: relative;
+  margin: 0 3rem;
+  padding: 2rem 1rem;
+}
+
+.closeBtn {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: solid 2px rgb(204, 166, 238);
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 22px;
+  right: -1.5rem;
+  color: hsl(var(--text));
+  text-align: center;
+}
+
+.closeBtn:after {
+  content: '\00d7';
+  margin: 0.01rem;
+}
+
+.closeBtn:hover {
+  background-color: rgb(204, 166, 238);
+}

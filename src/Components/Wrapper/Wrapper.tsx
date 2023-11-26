@@ -1,8 +1,8 @@
 import { ChildrenProps } from '../../models/types/types';
-import './Wrapper.css';
+import styles from './Wrapper.module.css';
 
 const Wrapper = ({ children }: ChildrenProps) => {
-  return <div className="wrapper">{children}</div>;
+  return <div className={styles.wrapper}>{children}</div>;
 };
 
 export default Wrapper;

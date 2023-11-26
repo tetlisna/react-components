@@ -1,5 +1,4 @@
 import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
-
 interface IState {
   isError: boolean;
   errorMessage: string;
@@ -19,9 +18,10 @@ class ErrorBoundary extends Component<PropsWithChildren, IState> {
   render(): ReactNode {
     if (this.state.isError) {
       return (
-        <div>
-          <h1>Something went wrong.</h1> {this.state.errorMessage}
-          Reload page.
+        <div style={{ padding: '2rem' }}>
+          <h1>Something went wrong.</h1>
+          <p>{this.state.errorMessage}</p>
+          <p>Reload the page.</p>
         </div>
       );
     }

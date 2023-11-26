@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { ItemMock, ItemListMock } from '../../test/mocks/itemMock';
+import { ItemMock, ItemListMock } from '../../test/mocks/itemMock.ts';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
-import { Item } from './Item.tsx';
+import { store } from '@/_store/store.ts';
+import { Item } from './[id].tsx';
 
 describe('Tests for the Item component', () => {
   vi.mock('../../services/items-api-slice.ts', async (importOriginal) => {
@@ -16,7 +16,7 @@ describe('Tests for the Item component', () => {
       ...mod,
       useItemsListQuery: () => ({
         data: ItemListMock,
-        isLoading: false,
+        isFetching: false,
         isError: false,
       }),
     };
@@ -30,7 +30,7 @@ describe('Tests for the Item component', () => {
         </MemoryRouter>
       </Provider>
     );
-    const detailsBtn = await screen.findByTestId('details-btn');
+    const detailsBtn = await screen.findByTestId('detailsBtn');
     await waitFor(() => {
       expect(detailsBtn).toBeInTheDocument();
       expect(screen.getByTestId('name')).toHaveTextContent(ItemMock.name);
