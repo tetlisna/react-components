@@ -1,0 +1,61 @@
+// {
+//   "compilerOptions": {
+//       "target": "ES2020",
+//       "useDefineForClassFields": true,
+//       "lib": ["ES2020", "DOM", "DOM.Iterable", "ESNext"],
+//       "module": "ESNext",
+//       "skipLibCheck": true,
+
+//       /* Bundler mode */
+//       "moduleResolution": "bundler",
+//       "allowImportingTsExtensions": true,
+//       "resolveJsonModule": true,
+//       "isolatedModules": true,
+//       "noEmit": true,
+//       "jsx": "preserve",
+
+//       /* Linting */
+//       "strict": true,
+//       "noUnusedLocals": true,
+//       "noUnusedParameters": true,
+//       "noFallthroughCasesInSwitch": true,
+
+//       /* recommended */
+//       "esModuleInterop": true,
+//       "allowSyntheticDefaultImports": true,
+//       "forceConsistentCasingInFileNames": true,
+//   },
+//   "include": ["../src"],
+//   "references": [{ "path": "./tsconfig.node.json" }]
+// }
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "plugins": [{ "name": "next" }],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": ["dist/types/**/*.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["./node_modules"]
+}
