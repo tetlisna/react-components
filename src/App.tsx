@@ -1,16 +1,9 @@
-import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import './App.scss';
+import { router } from './router.tsx';
 
 function App() {
-  return (
-    <>
-      <div>fffff</div>
-      <h1>Vite + React</h1>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-          </p>
-    </>
-  );
+  return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
 }
 
 export default App;
