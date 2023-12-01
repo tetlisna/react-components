@@ -1,34 +1,13 @@
-import { Resolver, useForm } from 'react-hook-form';
+import { Controller, Resolver, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { schema } from '../../models/yup/schema';
 import styles from './index.module.scss';
 import { useNavigate } from 'react-router-dom';
-// import { useRef } from 'react';
-
-const schema = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string().required('Last Name is required'),
-  age: yup.number().positive().integer().required('Age is required'),
-  gender: yup.string().required('Gender is required'),
-  email: yup.string().email().required('Email is required'),
-  password: yup.string().min(8).max(32).required('Password is required'),
-  image: yup.mixed().test('fileSize', 'File size is too large', (value) => {
-    return value ? (value as FileList)[0].size <= 1024 * 1024 : true;
-  }),
-});
-
-type FormData = {
-  firstName: string;
-  lastName: string;
-  age: number | null;
-  gender: string;
-  email: string;
-  password: string;
-  image: '' | undefined;
-};
+import { FormDataControlled } from '../../models/types/types';
+import { Gender } from '../../models/constants';
 
 export default function Form() {
-  const form = useForm<FormData>({
+  const form = useForm<FormDataControlled>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -38,28 +17,24 @@ export default function Form() {
       password: '',
       image: '',
     },
-    resolver: yupResolver(schema) as Resolver<FormData, object>,
+    resolver: yupResolver(schema) as Resolver<FormDataControlled, object>,
   });
   const {
     register,
     // setValue,
     handleSubmit,
     formState,
+    control,
     reset,
   } = form;
   const { errors } = formState;
   const navigate = useNavigate();
   // const fileInput = useRef(null);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(() => {
     reset();
     navigate('/');
   });
-
-  // function setValue(name: string, value: React.UIEvent) {
-  //   console.log('setValue', name, value);
-  // }
 
   return (
     <form onSubmit={onSubmit} noValidate>
@@ -70,27 +45,16 @@ export default function Form() {
           {...register('firstName')}
           placeholder="First Name"
           type="text"
-          required
         />
         <p className={styles.error}>{errors.firstName?.message}</p>
 
         <label>Last Name</label>
-        <input
-          {...register('lastName')}
-          placeholder="Last Name"
-          type="text"
-          required
-        />
+        <input {...register('lastName')} placeholder="Last Name" type="text" />
         <p className={styles.error}>{errors.lastName?.message}</p>
 
         <br />
         <label>Email</label>
-        <input
-          {...register('email')}
-          placeholder="Email"
-          type="email"
-          required
-        />
+        <input {...register('email')} placeholder="Email" type="email" />
         <p className={styles.error}>{errors.email?.message}</p>
 
         <label>Password</label>
@@ -98,13 +62,31 @@ export default function Form() {
           {...register('password')}
           placeholder="password"
           type="password"
-          required
         />
         <p className={styles.error}>{errors.password?.message}</p>
         <label>Age</label>
         <input {...register('age', { valueAsNumber: true })} />
         <p>{errors.age?.message}</p>
-
+        <Controller
+          name="gender"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Please select a gender' }}
+          render={({ field, fieldState }) => (
+            <div>
+              <label>Select Gender:</label>
+              <select {...field}>
+                {/* <option value="" disabled hidden>
+                  Select an option
+                </option> */}
+                <option value="">...</option>
+                <option value={Gender.Female}>Female</option>
+                <option value={Gender.Male}>Male</option>
+              </select>
+              {fieldState.error && <p>{fieldState.error.message}</p>}
+            </div>
+          )}
+        />
         <div>
           <label>Image</label>
           <input

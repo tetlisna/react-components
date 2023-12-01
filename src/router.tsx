@@ -7,7 +7,7 @@ import Main from './components/Main';
 import NotFound from './components/NotFound';
 import Form from './components/Form';
 import FormUncontrolled from './components/FormUncontrolled';
-import { ErrorBoundary } from './components/NotFound/ErrorBoundary';
+import ErrorBoundary from './components/NotFound/ErrorBoundary';
 
 const routes = createRoutesFromElements(
   <Route>
