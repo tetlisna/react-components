@@ -1,21 +1,14 @@
 import { Gender } from '../constants';
 
-export type FormDataUncontrolled = {
-  firstName: string;
-  lastName: string;
-  age: string | null;
-  gender: string;
-  email: string;
-  password: string;
-  image: File | null;
-};
-
-export type FormDataControlled = {
+export type FormData = {
   firstName: string;
   lastName: string;
   age: number | null;
-  gender: Gender.Female | Gender.Male | '';
+  gender1?: Gender.Female | Gender.Male | '';
+  gender?: string;
   email: string;
   password: string;
-  image: '' | undefined;
+  checkbox: boolean;
+  image: string;
+  // automplete: string;
 };

@@ -1,13 +1,18 @@
 import { Controller, Resolver, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../models/yup/schema';
-import styles from './index.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { FormDataControlled } from '../../models/types/types';
+import { FormData } from '../../models/types/types';
 import { Gender } from '../../models/constants';
+import styles from './index.module.scss';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import {
+  resetFormData,
+  setFormData,
+} from '../../store/reducers/formSliceReducer';
 
 export default function Form() {
-  const form = useForm<FormDataControlled>({
+  const form = useForm<FormData>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -15,24 +20,23 @@ export default function Form() {
       gender: '',
       email: '',
       password: '',
+      checkbox: false,
+      // automplete: '',
       image: '',
     },
-    resolver: yupResolver(schema) as Resolver<FormDataControlled, object>,
+    resolver: yupResolver(schema) as unknown as Resolver<FormData, object>,
   });
-  const {
-    register,
-    // setValue,
-    handleSubmit,
-    formState,
-    control,
-    reset,
-  } = form;
+  const { register, handleSubmit, formState, control } = form;
   const { errors } = formState;
   const navigate = useNavigate();
-  // const fileInput = useRef(null);
+  const dispatch = useAppDispatch();
 
   const onSubmit = handleSubmit(() => {
-    reset();
+    const result = form.getValues();
+    dispatch(setFormData(result));
+    console.log(form.getValues(), 'form.getValues()');
+
+    dispatch(resetFormData());
     navigate('/');
   });
 
@@ -52,7 +56,6 @@ export default function Form() {
         <input {...register('lastName')} placeholder="Last Name" type="text" />
         <p className={styles.error}>{errors.lastName?.message}</p>
 
-        <br />
         <label>Email</label>
         <input {...register('email')} placeholder="Email" type="email" />
         <p className={styles.error}>{errors.email?.message}</p>
@@ -66,7 +69,7 @@ export default function Form() {
         <p className={styles.error}>{errors.password?.message}</p>
         <label>Age</label>
         <input {...register('age', { valueAsNumber: true })} />
-        <p>{errors.age?.message}</p>
+        <p className={styles.error}>{errors.age?.message}</p>
         <Controller
           name="gender"
           control={control}
@@ -76,31 +79,33 @@ export default function Form() {
             <div>
               <label>Select Gender:</label>
               <select {...field}>
-                {/* <option value="" disabled hidden>
-                  Select an option
-                </option> */}
                 <option value="">...</option>
                 <option value={Gender.Female}>Female</option>
                 <option value={Gender.Male}>Male</option>
               </select>
-              {fieldState.error && <p>{fieldState.error.message}</p>}
+              {fieldState.error && (
+                <p className={styles.error}>{fieldState.error.message}</p>
+              )}
             </div>
           )}
         />
         <div>
           <label>Image</label>
           <input
-            // name="image"
             type="file"
-            accept="image/*"
             {...register('image')}
-            // ref={fileInput}
             // onChange={(e) => {
             //   setValue('image', e.target.files);
             // }}
           />
-          <p className={styles.error}>{errors.image?.message}</p>
+          {/* <p className={styles.error}>{errors.automplete?.message}</p> */}
         </div>
+
+        {/* <div>
+          <label>Country</label>
+          <input type="text" {...register('autocomplete')} />
+          <p className={styles.error}>{errors.automplete.message}</p>
+        </div> */}
       </div>
       <button type="submit">Submit</button>
     </form>
