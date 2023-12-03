@@ -10,7 +10,7 @@ type PropsSelect = {
   id: string;
   error?: string;
 };
-export const Input = forwardRef(
+export const Select = forwardRef(
   (
     { label, id, error = '' }: PropsSelect,
     ref: ForwardedRef<HTMLSelectElement>

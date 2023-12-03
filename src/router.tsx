@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import Main from './components/Main';
 import NotFound from './components/NotFound';
-import Form from './components/Form';
+import Form from './components/FormReactHookForm';
 import FormUncontrolled from './components/FormUncontrolled';
 import ErrorBoundary from './components/NotFound/ErrorBoundary';
 

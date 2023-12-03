@@ -43,13 +43,16 @@ export default function Main() {
                   <p>Email: {data.email}</p>
                   {/* <p>Password: {data.password}</p> */}
                   <p>Gender: {data.gender}</p>
-                  <p>Image: </p>
+                  <p>Country: {data.autocomplete}</p>
                   <img
                     src={data.image}
                     alt={`Image ${data.lastName}`}
-                    style={{ width: '100px', height: '100px' }}
+                    style={{
+                      width: '100px',
+                      height: '100px',
+                      borderRadius: '50%',
+                    }}
                   />
-                  <hr />
                 </div>
               ))
             )}

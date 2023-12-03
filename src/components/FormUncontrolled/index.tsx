@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import styles from './index.module.scss';
-import { FormData } from '../../models/types/types';
 import { schema } from '../../models/yup/schema';
 import { ValidationError } from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { convertFileToBase64 } from '../../helpers/utils';
 import { Checkbox } from './Checkbox/Checkbox';
 import { Autocomplete } from './Autocomplete/Autocomplete';
 import { Input } from './InputUncontrolled/Input';
+import { Select } from './SelectUncontrolled/Select';
 
 export default function FormUncontrolled() {
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -31,7 +31,7 @@ export default function FormUncontrolled() {
   );
 
   const validateForm = async () => {
-    const formData: FormData = {
+    const formData = {
       firstName: firstNameRef.current?.value || '',
       lastName: lastNameRef.current?.value || '',
       age: Number(ageRef.current?.value) || null,
@@ -39,7 +39,7 @@ export default function FormUncontrolled() {
       password: passwordRef.current?.value || '',
       passwordConfirm: passwordConfirmRef.current?.value || '',
       gender: genderRef.current?.value || '',
-      image: imageRef.current?.files?.[0]?.name || '',
+      image: imageRef.current?.files?.[0] || undefined,
       checkbox: checkRef.current?.checked || false,
       autocomplete: autocompleteRef.current?.value || '',
     };
@@ -104,8 +104,8 @@ export default function FormUncontrolled() {
           label={'First Name'}
           placeholder={'First Name'}
           id={'firstName'}
-          error={errorMessages['firstName']}
           ref={firstNameRef}
+          error={errorMessages['firstName']}
         />
         <Input
           type={'lastName'}
@@ -120,53 +120,54 @@ export default function FormUncontrolled() {
           label={'Email'}
           placeholder={'Email'}
           id={'email'}
-          error={errorMessages['email']}
           ref={emailRef}
+          error={errorMessages['email']}
         />
         <Input
           type={'password'}
           label={'Password'}
           placeholder={'Password'}
           id={'password'}
-          error={errorMessages['password']}
           ref={passwordRef}
+          error={errorMessages['password']}
         />
         <Input
           type={'password'}
           label={'Confirm Password'}
           placeholder={'Confirm Password'}
           id={'passwordConfirm'}
-          error={errorMessages['passwordConfirm']}
           ref={passwordConfirmRef}
+          error={errorMessages['passwordConfirm']}
         />
-
         <Input
           type={'age'}
           label={'Age'}
           placeholder={'Your Age'}
           id={'age'}
-          error={errorMessages['age']}
           ref={ageRef}
+          error={errorMessages['age']}
         />
-
-        <label htmlFor="gender">Gender</label>
-        <select id="gender" ref={genderRef}>
-          <option value="">...</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-        </select>
-        <p className={styles.error}>{errorMessages['gender']}</p>
-
-        <label htmlFor="image">
-          <input id="image" type="file" ref={imageRef} />
-          <small>Image</small>
-        </label>
-        <p className={styles.error}>{errorMessages['imageRef']}</p>
+        <Select
+          label={'Gender'}
+          id={'gender'}
+          type={'gender'}
+          placeholder={'Gender'}
+          ref={genderRef}
+          error={errorMessages['gender']}
+        />
+        <Input
+          type={'file'}
+          label={'Upload Image'}
+          placeholder={'Upload Image'}
+          id={'image'}
+          ref={imageRef}
+          error={errorMessages['image']}
+        />
         <Autocomplete
           id={'autocomplete'}
           label="Country"
-          error={errorMessages['autocomplete']}
           ref={autocompleteRef}
+          error={errorMessages['autocomplete']}
         />
         <Checkbox
           id={'checkbox'}

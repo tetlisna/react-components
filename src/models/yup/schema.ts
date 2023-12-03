@@ -37,18 +37,18 @@ export const schema = yup.object().shape({
     .required('Password confirm is required'),
   image: yup
     .mixed()
-    .test('fileType', 'Only JPEG and PNG are allowed', (value) => {
-      if (Array.isArray(value)) {
-        value && ['image/jpeg', 'image/png'].includes(value[0].type);
-      }
-      return true;
-    })
     .test('fileSize', 'File size is too large', (value) => {
-      if (Array.isArray(value)) {
-        return value[0].size <= 1024 * 1024;
-      }
-      return true;
-    }),
+      return (value as { size: number }).size <= 1024 * 1024;
+    })
+    .test('fileType', 'Only JPEG and PNG are allowed', (value) => {
+      return (
+        value &&
+        ['image/jpeg', 'image/jpg', 'image/png'].includes(
+          (value as { type: string }).type
+        )
+      );
+    })
+    .required('Image is required'),
   checkbox: yup.boolean().oneOf([true], 'Please accept terms and conditions'),
   autocomplete: yup.string().required('Country is required'),
 });
