@@ -10,7 +10,13 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "fix": "prettier --write \"src/**/*.{ts,tsx}\"",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tetlisna/react-components.git"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
@@ -32,6 +38,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "gh-pages": "^6.1.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0",
     "prettier": "3.1.0",

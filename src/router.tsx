@@ -17,4 +17,6 @@ const routes = createRoutesFromElements(
     <Route path="*" element={<NotFound />} />
   </Route>
 );
-export const router = createBrowserRouter(routes, { basename: '/' });
+export const router = createBrowserRouter(routes, {
+  basename: '/react-components/',
+});
