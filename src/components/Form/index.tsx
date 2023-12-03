@@ -20,6 +20,7 @@ export default function Form() {
       gender: '',
       email: '',
       password: '',
+      passwordConfirm: '',
       checkbox: false,
       // automplete: '',
       image: '',
@@ -67,6 +68,15 @@ export default function Form() {
           type="password"
         />
         <p className={styles.error}>{errors.password?.message}</p>
+
+        <label>Confirm Password</label>
+        <input
+          {...register('passwordConfirm')}
+          placeholder="passwordConfirm"
+          type="password"
+        />
+        <p className={styles.error}>{errors.passwordConfirm?.message}</p>
+
         <label>Age</label>
         <input {...register('age', { valueAsNumber: true })} />
         <p className={styles.error}>{errors.age?.message}</p>

@@ -1,0 +1,13 @@
+.autocomplete {
+  display: block;
+  align-items: start;
+  justify-content: start;
+  padding: 0.5rem;
+
+  .error {
+    color: var(--color-danger);
+  }
+  .autocompleteList {
+    color: var(--color-text);
+  }
+}

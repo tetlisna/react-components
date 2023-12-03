@@ -28,15 +28,27 @@ export default function Main() {
               <>{dispatch(resetFormData())}</>
             ) : (
               formData.map((data, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
                   <p>First Name: {data.firstName}</p>
                   <p>Last Name: {data.lastName}</p>
                   <p>Age: {data.age}</p>
                   <p>Email: {data.email}</p>
-                  <p>Password: {data.password}</p>
+                  {/* <p>Password: {data.password}</p> */}
                   <p>Gender: {data.gender}</p>
                   <p>Image: </p>
-                  <img src={data.image} alt={`Image ${data.lastName}`} />
+                  <img
+                    src={data.image}
+                    alt={`Image ${data.lastName}`}
+                    style={{ width: '100px', height: '100px' }}
+                  />
                   <hr />
                 </div>
               ))

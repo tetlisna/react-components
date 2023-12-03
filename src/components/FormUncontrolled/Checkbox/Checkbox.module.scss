@@ -1,0 +1,10 @@
+.checkboxWrapper {
+  &.checked {
+    .checkbox {
+      display: block;
+    }
+  }
+  .error {
+    color: var(--color-danger);
+  }
+}

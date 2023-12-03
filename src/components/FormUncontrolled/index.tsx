@@ -1,11 +1,15 @@
 import { useRef, useState } from 'react';
 import styles from './index.module.scss';
-import { schema } from '../../models/yup/schema';
 import { FormData } from '../../models/types/types';
+import { schema } from '../../models/yup/schema';
 import { ValidationError } from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { setFormData } from '../../store/reducers/formSliceReducer';
+import { convertFileToBase64 } from '../../helpers/utils';
+import { Checkbox } from './Checkbox/Checkbox';
+import { Autocomplete } from './Autocomplete/Autocomplete';
+import { Input } from './InputUncontrolled/Input';
 
 export default function FormUncontrolled() {
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -13,9 +17,11 @@ export default function FormUncontrolled() {
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const checkRef = useRef<HTMLInputElement>(null);
+  const autocompleteRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -23,45 +29,26 @@ export default function FormUncontrolled() {
   const [errorMessages, setErrorMessages] = useState(
     {} as { [key: string]: string }
   );
-  const validateForm = async () => {
-    const imageFile = imageRef.current?.files?.[0];
-    let base64String = '';
-    if (imageFile) {
-      const reader = new FileReader();
 
-      reader.onload = (event) => {
-        if (event.target) {
-          base64String = event.target.result as string;
-        }
-      };
-    }
+  const validateForm = async () => {
     const formData: FormData = {
       firstName: firstNameRef.current?.value || '',
       lastName: lastNameRef.current?.value || '',
       age: Number(ageRef.current?.value) || null,
       email: emailRef.current?.value || '',
       password: passwordRef.current?.value || '',
+      passwordConfirm: passwordConfirmRef.current?.value || '',
       gender: genderRef.current?.value || '',
-      image: base64String || '',
+      image: imageRef.current?.files?.[0]?.name || '',
       checkbox: checkRef.current?.checked || false,
-      // image: imageRef.current?.files?.[0] || null,
-      // autocomplete: countryRef.current?.value || null,
+      autocomplete: autocompleteRef.current?.value || '',
     };
-    console.log(base64String, 'base64String');
     console.log(formData, 'formData');
 
     try {
       await schema.validate(formData, { abortEarly: false, strict: false });
       if (!checkRef.current?.checked) {
-        console.log(checkRef, 'checkRef');
-
-        // throw new ValidationError(
-        //   'Accept T&C is required',
-        //    checkRef.current?.name,
-        //   //  formData,
-        //   //  null,
-        //   //  checkRef.current
-        // );
+        console.log('ref', checkRef.current?.checked);
       }
       setErrorMessages({});
     } catch (error) {
@@ -86,18 +73,24 @@ export default function FormUncontrolled() {
       age: Number(ageRef.current?.value) || null,
       email: emailRef.current?.value || '',
       password: passwordRef.current?.value || '',
+      passwordConfirm: passwordConfirmRef.current?.value || '',
       gender: genderRef.current?.value || '',
-      image: imageRef.current?.files?.[0]?.name || '',
+      image: '',
       checkbox: true || false,
-      // autocomplete: country.current?.value,
+      autocomplete: autocompleteRef.current?.value || '',
     };
+
+    if (imageRef.current?.files?.[0]) {
+      const imageFile = imageRef.current?.files?.[0];
+      const base64String = await convertFileToBase64(imageFile);
+      formDataFilled.image = base64String;
+    }
     const checkForm = Object.values(formDataFilled).every(
       (value) => value !== undefined && value !== null && value !== ''
     );
     await validateForm();
-    if (Object.keys(errorMessages).length === 0 && checkForm) {
-      console.log(formDataFilled, 'formDataFilled');
 
+    if (Object.keys(errorMessages).length === 0 && checkForm) {
       dispatch(setFormData(formDataFilled));
       navigate('/');
     }
@@ -106,29 +99,55 @@ export default function FormUncontrolled() {
   return (
     <form onSubmit={onSubmit} autoComplete="off" noValidate>
       <div className={styles.formControl}>
-        <label>First Name</label>
-        <input placeholder="First Name" type="text" ref={firstNameRef} />
-        <p className={styles.error}>{errorMessages['firstName']}</p>
+        <Input
+          type={'firstName'}
+          label={'First Name'}
+          placeholder={'First Name'}
+          id={'firstName'}
+          error={errorMessages['firstName']}
+          ref={firstNameRef}
+        />
+        <Input
+          type={'lastName'}
+          label={'Last Name'}
+          placeholder={'Last Name'}
+          id={'lastName'}
+          error={errorMessages['lastName']}
+          ref={lastNameRef}
+        />
+        <Input
+          type={'email'}
+          label={'Email'}
+          placeholder={'Email'}
+          id={'email'}
+          error={errorMessages['email']}
+          ref={emailRef}
+        />
+        <Input
+          type={'password'}
+          label={'Password'}
+          placeholder={'Password'}
+          id={'password'}
+          error={errorMessages['password']}
+          ref={passwordRef}
+        />
+        <Input
+          type={'password'}
+          label={'Confirm Password'}
+          placeholder={'Confirm Password'}
+          id={'passwordConfirm'}
+          error={errorMessages['passwordConfirm']}
+          ref={passwordConfirmRef}
+        />
 
-        <br />
-
-        <label htmlFor="lastName">Last Name</label>
-        <input id="lastName" placeholder="Last Name" ref={lastNameRef} />
-        <p className={styles.error}>{errorMessages['lastName']}</p>
-
-        <br />
-
-        <label htmlFor="email">Email</label>
-        <input id="email" placeholder="Email" type="email" ref={emailRef} />
-        <p className={styles.error}>{errorMessages['email']}</p>
-
-        <br />
-
-        <label htmlFor="password">Password</label>
-        <input type="password" placeholder="password" ref={passwordRef} />
-        <p className={styles.error}>{errorMessages['password']}</p>
-
-        <br />
+        <Input
+          type={'age'}
+          label={'Age'}
+          placeholder={'Your Age'}
+          id={'age'}
+          error={errorMessages['age']}
+          ref={ageRef}
+        />
 
         <label htmlFor="gender">Gender</label>
         <select id="gender" ref={genderRef}>
@@ -138,27 +157,24 @@ export default function FormUncontrolled() {
         </select>
         <p className={styles.error}>{errorMessages['gender']}</p>
 
-        <br />
-
-        <label>Age</label>
-        <input type="number" ref={ageRef} min="16" max="110" />
-        <br />
-        <p className={styles.error}>{errorMessages['age']}</p>
-
-        <label>Upload file:</label>
-        <input type="file" placeholder="file" ref={imageRef} />
-
-        <p className={styles.error}>{errorMessages['image']}</p>
-
-        <br />
-
-        <label htmlFor="checkbox">
-          <input type="checkbox" ref={checkRef} />
-          <small>Accept Terms & Conditions</small>
+        <label htmlFor="image">
+          <input id="image" type="file" ref={imageRef} />
+          <small>Image</small>
         </label>
-        <p className={styles.error}>{errorMessages['checkRef']}</p>
-
-        <br />
+        <p className={styles.error}>{errorMessages['imageRef']}</p>
+        <Autocomplete
+          id={'autocomplete'}
+          label="Country"
+          error={errorMessages['autocomplete']}
+          ref={autocompleteRef}
+        />
+        <Checkbox
+          id={'checkbox'}
+          type={'checkbox'}
+          label={'Accept Terms & Conditions'}
+          ref={checkRef}
+          error={errorMessages['checkbox']}
+        />
       </div>
       <button type="submit">Submit</button>
     </form>

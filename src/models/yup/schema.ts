@@ -18,7 +18,6 @@ export const schema = yup.object().shape({
     .required('Last Name is required'),
   age: yup.number().positive().integer().required('Age is required'),
   gender: yup.string().required('Gender is required'),
-  checkbox: yup.boolean().required('Please accept terms and conditions'),
   email: yup.string().email().required('Email is required'),
   password: yup
     .string()
@@ -32,6 +31,10 @@ export const schema = yup.object().shape({
     .min(8, 'Password must be more then 8 characters')
     .max(16, 'Password must be less then 16 characters')
     .required('Password is required'),
+  passwordConfirm: yup
+    .string()
+    .oneOf([yup.ref('password'), undefined], 'Passwords must match')
+    .required('Password confirm is required'),
   image: yup
     .mixed()
     .test('fileType', 'Only JPEG and PNG are allowed', (value) => {
@@ -46,5 +49,6 @@ export const schema = yup.object().shape({
       }
       return true;
     }),
-  // autocomplete: yup.string().required('Autocomplete is required'),
+  checkbox: yup.boolean().oneOf([true], 'Please accept terms and conditions'),
+  autocomplete: yup.string().required('Country is required'),
 });
