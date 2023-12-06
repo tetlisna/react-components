@@ -36,19 +36,27 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref('password'), undefined], 'Passwords must match')
     .required('Password confirm is required'),
   image: yup
-    .mixed()
-    .test('fileSize', 'File size is too large', (value) => {
-      return (value as { size: number }).size <= 1024 * 1024;
-    })
-    .test('fileType', 'Only JPEG and PNG are allowed', (value) => {
-      return (
-        value &&
-        ['image/jpeg', 'image/jpg', 'image/png'].includes(
-          (value as { type: string }).type
-        )
-      );
-    })
-    .required('Image is required'),
+    .mixed<FileList>()
+    .test(
+      'length',
+      'You need to upload a picture',
+      (files) => !files || files.length !== 0
+    )
+    .test(
+      'type',
+      'Only JPEG and PNG are allowed',
+      (files) =>
+        !files ||
+        files.length === 0 ||
+        ['image/jpeg', 'image/jpg', 'image/png'].includes(files[0].type)
+    )
+    .test(
+      'fileSize',
+      'Only pictures up to 3MB are allowed',
+      (files) => !files || files.length === 0 || files[0].size <= 3000000
+    ),
   checkbox: yup.boolean().oneOf([true], 'Please accept terms and conditions'),
   autocomplete: yup.string().required('Country is required'),
 });
+
+export type UserSchema = yup.InferType<typeof schema>;

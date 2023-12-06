@@ -1,12 +1,12 @@
 export type FormData = {
   firstName: string;
   lastName: string;
-  age: number | null;
-  gender?: string;
+  age: number;
+  gender: string;
   email: string;
   password: string;
   passwordConfirm: string;
-  checkbox: boolean;
+  checkbox?: boolean;
   image: string;
   autocomplete: string;
 };

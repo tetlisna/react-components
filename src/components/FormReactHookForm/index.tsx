@@ -1,48 +1,36 @@
-import { Controller, Resolver, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '../../models/yup/schema';
+import { UserSchema, schema } from '../../models/yup/schema';
 import { useNavigate } from 'react-router-dom';
-import { FormData } from '../../models/types/types';
 import { Gender } from '../../models/constants';
 import styles from './index.module.scss';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import {
-  resetFormData,
-  setFormData,
-} from '../../store/reducers/formSliceReducer';
+import { setFormData } from '../../store/reducers/formSliceReducer';
+import { convertFileToBase64 } from '../../helpers/utils';
+import { Autocomplete } from './Autocomplete';
 
 export default function Form() {
-  const form = useForm<FormData>({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      age: null,
-      gender: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-      checkbox: false,
-      // automplete: '',
-      image: '',
-    },
-    resolver: yupResolver(schema) as unknown as Resolver<FormData, object>,
+  const form = useForm<UserSchema>({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
   });
   const { register, handleSubmit, formState, control } = form;
-  const { errors } = formState;
+  const { errors, isValid } = formState;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onSubmit = handleSubmit(() => {
-    const result = form.getValues();
-    dispatch(setFormData(result));
-    console.log(form.getValues(), 'form.getValues()');
-
-    dispatch(resetFormData());
-    navigate('/');
-  });
+  const onSubmit = async (data: UserSchema) => {
+    if (data.image) {
+      const file = data.image[0];
+      const base64String = await convertFileToBase64(file);
+      const newData = { ...data, image: base64String };
+      dispatch(setFormData(newData));
+      navigate('/');
+    }
+  };
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <h2>React Hook Form</h2>
       <div className={styles.formControl}>
         <label>First Name</label>
@@ -78,7 +66,7 @@ export default function Form() {
         <p className={styles.error}>{errors.passwordConfirm?.message}</p>
 
         <label>Age</label>
-        <input {...register('age', { valueAsNumber: true })} />
+        <input {...register('age')} />
         <p className={styles.error}>{errors.age?.message}</p>
         <Controller
           name="gender"
@@ -99,25 +87,25 @@ export default function Form() {
             </div>
           )}
         />
-        <div>
-          <label>Image</label>
-          <input
-            type="file"
-            {...register('image')}
-            // onChange={(e) => {
-            //   setValue('image', e.target.files);
-            // }}
-          />
-          {/* <p className={styles.error}>{errors.automplete?.message}</p> */}
-        </div>
 
-        {/* <div>
-          <label>Country</label>
-          <input type="text" {...register('autocomplete')} />
-          <p className={styles.error}>{errors.automplete.message}</p>
-        </div> */}
+        <div>
+          <label htmlFor="image">Upload Image</label>
+          <input id="image" type="file" {...register('image')} />
+          {errors.image && (
+            <p className={styles.error}>{errors.image.message}</p>
+          )}
+        </div>
+        <Controller
+          name="autocomplete"
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <Autocomplete onChange={onChange} errors={error?.message} />
+          )}
+        />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={!isValid}>
+        Submit
+      </button>
     </form>
   );
 }

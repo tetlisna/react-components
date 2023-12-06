@@ -34,7 +34,7 @@ export default function FormUncontrolled() {
     const formData = {
       firstName: firstNameRef.current?.value || '',
       lastName: lastNameRef.current?.value || '',
-      age: Number(ageRef.current?.value) || null,
+      age: Number(ageRef.current?.value) || 0,
       email: emailRef.current?.value || '',
       password: passwordRef.current?.value || '',
       passwordConfirm: passwordConfirmRef.current?.value || '',
@@ -43,13 +43,9 @@ export default function FormUncontrolled() {
       checkbox: checkRef.current?.checked || false,
       autocomplete: autocompleteRef.current?.value || '',
     };
-    console.log(formData, 'formData');
 
     try {
       await schema.validate(formData, { abortEarly: false, strict: false });
-      if (!checkRef.current?.checked) {
-        console.log('ref', checkRef.current?.checked);
-      }
       setErrorMessages({});
     } catch (error) {
       if (error instanceof ValidationError) {
@@ -70,7 +66,7 @@ export default function FormUncontrolled() {
     const formDataFilled = {
       firstName: firstNameRef.current?.value || '',
       lastName: lastNameRef.current?.value || '',
-      age: Number(ageRef.current?.value) || null,
+      age: Number(ageRef.current?.value) || 0,
       email: emailRef.current?.value || '',
       password: passwordRef.current?.value || '',
       passwordConfirm: passwordConfirmRef.current?.value || '',

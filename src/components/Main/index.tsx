@@ -8,8 +8,6 @@ export default function Main() {
   const formData = useAppSelector((state: RootState) => state.form.formData);
   const dispatch = useAppDispatch();
 
-  console.log(formData, 'form main');
-
   return (
     <div className={styles.main}>
       <nav>
